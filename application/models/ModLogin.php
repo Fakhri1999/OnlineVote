@@ -16,8 +16,6 @@ class ModLogin extends CI_Model {
     public function getSpecific($data)
     {
         return $this->db->get_where('user', $data)->row_array();
-
-        // $this->db->where('password', $data['password']);
     }
     
 

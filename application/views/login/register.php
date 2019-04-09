@@ -19,6 +19,7 @@
     <div class="container mt-5 text-center">
         <div class="card w-50 m-auto">
             <div class="card-body">
+            <h5 class="card-title">Register</h5>
                 <form action="register" method="post">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">

@@ -1,6 +1,7 @@
     <div class="container mt-5 text-center">
         <div class="card w-50 m-auto">
             <div class="card-body">
+                <h5 class="card-title">Login</h5>
                 <?= $this->session->flashdata('message'); ?>
                 <form action="login" method="post">
                     <div class="input-group mb-3">
