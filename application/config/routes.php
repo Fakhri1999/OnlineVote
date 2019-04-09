@@ -8,8 +8,9 @@ $route['translate_uri_dashes'] = FALSE;
 $route['default_controller'] = 'home';
 
 // Login Routing
-$route['login'] = 'Login/login';
-$route['logout'] = 'Login/logout';
+$route['login'] = 'Login';
+$route['register'] = 'Login/register';
+$route['logout'] = 'User/logout';
 
 // User Routing
 
