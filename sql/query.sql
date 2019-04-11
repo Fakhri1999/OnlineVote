@@ -1,0 +1,4 @@
+-- USE DATABASE HERE
+USE OnlineVote
+
+-- CRUD HERE

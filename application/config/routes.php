@@ -16,4 +16,4 @@ $route['logout'] = 'User/logout';
 
 
 // Room Vote Routing
-$route['room/([0-9a-zA-Z]{5})'] = 'Vote/roomVote/$1';
+$route['room'] = 'Vote/roomVote';

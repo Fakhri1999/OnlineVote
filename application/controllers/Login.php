@@ -21,7 +21,6 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
         
         if( $this->form_validation->run()==false){
-            $this->load->view('templates/header');
             $this->load->view('login/login');
         } else {
             // Jika pengisian form berhasil
@@ -65,7 +64,6 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('passwordconf', 'Password Confirmation', 'trim|required|matches[password]');
         
         if($this->form_validation->run()==false){
-            $this->load->view('templates/header');
             $this->load->view('login/register');
         } else {
             // Jika pengisian form berhasil
@@ -85,7 +83,6 @@ class Login extends CI_Controller
             Your account has been created.
             </div>');            
             redirect('login');
-            
         }
     }
 
