@@ -34,8 +34,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                     <input class="mx-2 btn btn-outline-success wow fadeInUp" type="submit" value="Submit Vote">
                 </div>
