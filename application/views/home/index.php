@@ -57,7 +57,7 @@
 </section>
 <section class="container-fluid section-md mt-5 blue" id="vote">
     <div class="wow zoomIn">
-        <form action="room/" method="post">
+        <form action="room" method="post">
             <div class="row">
                 <div class="col col-lg-12 mb-2 text-center">
                     <h4>Insert Your <span class="txt-pink">Vote Room's Code</span></h4>
@@ -65,10 +65,15 @@
             </div>
             <div class="row">
                 <div class="input-group col col-lg-6 col-md-6 col-sm-6 col-xs-6 mx-auto">
-                    <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" placeholder="" name="codeVote" maxlength="8">
                     <div class="input-group-append">
                         <button class="btn btn-secondary" type="submit">Enter</button>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-12 mb-2 text-center">
+                    <?= $this->session->flashdata('rooms'); ?>
                 </div>
             </div>
         </form>
@@ -118,31 +123,3 @@
         </div>
     </div>
 </section>
-<footer>
-    <div class="container-fluid p-2 blue">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-6">
-                    <ul class="nav justify-content-center justify-content-md-start">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#servis">Service</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#vote">Vote</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#about">About</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt-4 mt-md-0 text-center text-md-right">
-                    <a href="#" class="mx-2"><i class="fab fa fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#" class="mx-2"><i class="fab fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#" class="mx-2"><i class="fab fa fa-instagram" aria-hidden="true"></i></a>
-                    <a href="#" class="mx-2"><i class="fab fa fa-pinterest" aria-hidden="true"></i></a>
-                    <a href="#" class="mx-2"><i class="fab fa fa-google" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>

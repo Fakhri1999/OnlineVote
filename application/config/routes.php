@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
@@ -17,3 +17,6 @@ $route['logout'] = 'User/logout';
 
 // Room Vote Routing
 $route['room'] = 'Vote/roomVote';
+$route['roomDetails/([0-9a-zA-Z]{8})'] = 'Vote/detailVote/$1';
+$route['endVote/([0-9a-zA-Z]{8})'] = 'Vote/endVoteNow/$1';
+$route['createVote'] = 'Vote/createVote';
