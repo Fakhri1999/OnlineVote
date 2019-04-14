@@ -35,17 +35,17 @@ class Login extends CI_Controller
             $result = $this->ModLogin->getSpecific($data);
             if($result){
                 // Jika username dan password ada di database
-                $data = [
-                    'username' => $result['username']
-                ];
-                $this->session->set_userdata($data);
-                redirect('');
-            } else {
+                    $data = [
+                        'username' => $result['username']
+                    ];
+                    $this->session->set_userdata($data);
+                    redirect('');
+                } else {
                 // Jika username dan password tidak ada di database
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                Invalid username or password.
-                </div>');
-                redirect('login');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    Invalid username or password.
+                    </div>');
+                    redirect('login');
             }
         }        
     }
@@ -78,10 +78,16 @@ class Login extends CI_Controller
                 'email' => $email
             ];
 
-            $this->ModLogin->insert($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Your account has been created.
-            </div>');            
+            $result = $this->ModLogin->insert($data);
+            if($result){
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                Your account has been created. You can now login with your account.
+                </div>');            
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                Registration failed. Please contact our support at <b>admin@onlinevote.com</b>
+                </div>');            
+            }       
             redirect('login');
         }
     }
