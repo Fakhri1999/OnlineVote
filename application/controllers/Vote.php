@@ -7,7 +7,10 @@ class Vote extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
+        if ($this->session->userdata('username') == null) {
+            redirect('login');
+        }
+        
         $this->load->model('ModRoom');
     }
 
@@ -64,7 +67,7 @@ class Vote extends CI_Controller
         $re = '/^[\w|\d]{8}/';
 
         preg_match_all($re, $code, $matches, PREG_SET_ORDER, 0);
-        if(!$matches){
+        if (!$matches) {
             $this->session->set_flashdata('rooms', '<p class="text-danger lead wow shake mt-3"> Special character isn\'t allowed</p>');
             redirect('#vote');
         }
