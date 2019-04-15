@@ -33,7 +33,11 @@ class Vote extends CI_Controller
     { }
 
     public function roomVote()
-    { }
+    { 
+        $code = $this->input->post('');
+
+        
+    }
 }
 
 /* End of file Vote.php */
