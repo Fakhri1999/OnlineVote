@@ -65,7 +65,7 @@
             </div>
             <div class="row">
                 <div class="input-group col col-lg-6 col-md-6 col-sm-6 col-xs-6 mx-auto">
-                    <input type="text" class="form-control" placeholder="" name="codeVote" maxlength="8">
+                    <input type="text" class="form-control" placeholder="" name="codeVote" maxlength="5">
                     <div class="input-group-append">
                         <button class="btn btn-secondary" type="submit">Enter</button>
                     </div>

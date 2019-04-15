@@ -25,11 +25,6 @@ class Vote extends CI_Controller
         return $generatedCode;
     }
 
-    public function getCode()
-    {
-        echo $this->generateCode();
-    }
-
     public function createVote()
     {
         $insertData = array(
@@ -69,7 +64,7 @@ class Vote extends CI_Controller
     public function roomVote()
     {
         $code = str_replace("_", "", $this->input->post('codeVote'));
-        $re = '/^[\w|\d]{8}/';
+        $re = '/^[\w|\d]{5}/';
 
         preg_match_all($re, $code, $matches, PREG_SET_ORDER, 0);
         if (!$matches) {
