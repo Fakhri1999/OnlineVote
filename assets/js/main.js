@@ -11,8 +11,10 @@ $(document).ready(function () {
       }
 
       for (let i = 0; i < value; i++) {
-         render += `<div class="col col-4"><div class="card mx-1 mb-3 shadow-sm"><div class="card-body">`;
-         render += `<input type="hidden" name="pilihanId" value=${generateCandidate()}>`;
+         render += `<div class="col-md-4"><div class="card mx-1 mb-3 shadow-sm"><div class="card-body">`;
+         // render += `<span class="col-lg-12">Picture : <input type="file" name="list[][file]"></span>`;
+         render += `<input class="col-lg" type="text" name="list[][nama]">`;
+         render += `<input type="hidden" name="list[][pilihan]" value=${generateCandidate()}>`;
          render += `</div></div></div>`;
       }
       $('.renderThis').html(render)

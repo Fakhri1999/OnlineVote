@@ -103,13 +103,15 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="row mt-3 mb-3 renderThis">
-                                                <!-- <div class="p-3 card shadow-sm wow fadeIn">
+                                            <div class="col-md-12">
+                                                <div class="row mt-3 mb-3 renderThis">
+                                                    <!-- <div class="p-3 card shadow-sm wow fadeIn">
                                                         <div class="card-body">
                                                             Render Here
                                                         </div>
                                                         </div>
                                                     </div> -->
+                                                </div>
                                             </div>
                                             <div class="form-row mt-3">
                                                 <div class="col-md-12 text-right">
@@ -117,6 +119,7 @@
                                                     <button class="btn btn-md btn-primary" type="submit">Submit</button>
                                                 </div>
                                             </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
