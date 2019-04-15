@@ -31,8 +31,8 @@ class ModRoom extends CI_Model
    {
       $this->db->select('active');
       $this->db->from('room');
-      $this->db->where('id_kode', $code);
-      return $this->db->get()->result();
+      $this->db->where('kode_room', $code);
+      return $this->db->get()->result()->active;
    }
 
    private function checkRoomId($code)
@@ -46,7 +46,7 @@ class ModRoom extends CI_Model
    public function checkUserVoted($code)
    {
       $checkData = array(
-         'id_room' => $this->checkRoomId($code),
+         'id_room' => $this->checkRoomId($code)->id_room,
          'id_user' => $this->session->userdata('id_user')
       );
 

@@ -10,12 +10,12 @@ $(document).ready(function () {
          return false
       }
 
-      for (let i = 0; i < parseInt(value); i++) {
+      for (let i = 0; i < value; i++) {
          render += `<div class="col col-4"><div class="card mx-1 mb-3 shadow-sm"><div class="card-body">`;
-         render += `${generateCandidate()}`;
+         render += `<input type="hidden" name="pilihanId" value=${generateCandidate()}>`;
          render += `</div></div></div>`;
-         $('.renderThis').html(render)
       }
+      $('.renderThis').html(render)
    })
 })
 
@@ -28,7 +28,6 @@ function generateCandidate() {
 
    return generatedCode;
 }
-
 
 // Button func
 const endVote = (code) => {

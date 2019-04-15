@@ -67,23 +67,29 @@ class Vote extends CI_Controller
         $re = '/^[\w|\d]{5}/';
 
         preg_match_all($re, $code, $matches, PREG_SET_ORDER, 0);
+        if(strlen($code) < 5){
+            $this->session->set_flashdata('rooms', 'Please input the correct code');
+            redirect('#vote');
+        }
+
         if (!$matches) {
-            $this->session->set_flashdata('rooms', '<p class="text-danger lead wow shake mt-3"> Special character isn\'t allowed</p>');
+            $this->session->set_flashdata('rooms', 'Special character isn\'t allowed');
             redirect('#vote');
         }
 
         if (!$this->ModRoom->checkSpecificRoom($code)) {
-            $this->session->set_flashdata('rooms', '<p class="text-danger lead wow shake mt-3"> Invalid room code</p>');
+            $this->session->set_flashdata('rooms', 'Invalid room code');
             redirect('#vote');
         }
 
         if (!$this->ModRoom->checkRoomActive($code)) {
-            $this->session->set_flashdata('rooms', '<p class="text-danger lead wow shake mt-3"> Sorry, the vote room has been closed</p>');
+            $this->session->set_flashdata('rooms', 'Sorry, the vote room has been closed');
             redirect('#vote');
         }
 
-        if ($this->ModRoom->checkUserVoted($code)) {
-            // kalau user sudah vote
+        if (!$this->ModRoom->checkUserVoted($code)) {
+            $this->session->set_flashdata('rooms', 'Sorry, You\'ve already voted');
+            redirect('#vote');
         }
 
         $data['sql'] = $this->ModRoom->loadSpecificRoom($code);

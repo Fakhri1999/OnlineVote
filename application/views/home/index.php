@@ -73,7 +73,7 @@
             </div>
             <div class="row">
                 <div class="col col-lg-12 mb-2 text-center">
-                    <?= $this->session->flashdata('rooms'); ?>
+                    <!-- <?= $this->session->flashdata('rooms'); ?> -->
                 </div>
             </div>
         </form>

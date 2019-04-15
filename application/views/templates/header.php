@@ -14,6 +14,7 @@
 
     <!-- Font import -->
     <link href="https://fonts.googleapis.com/css?family=Amaranth" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </head>
 
 <body>
@@ -50,3 +51,14 @@
         </div>
     </nav>
     <!-- End navbar -->
+
+    <?php if ($this->session->flashdata('rooms')) : ?>
+        <script>
+            swal.fire({
+                type: 'error',
+                title: "<?= $this->session->flashdata('rooms'); ?>",
+                button: false,
+                timer: 5000,
+            });
+        </script>
+    <?php endif; ?>
