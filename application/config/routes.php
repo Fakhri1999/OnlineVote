@@ -13,7 +13,7 @@ $route['register'] = 'Login/register';
 $route['logout'] = 'User/logout';
 
 // User Routing
-
+$route['renderVote'] = 'User/renderVote';
 
 // Room Vote Routing
 $route['room'] = 'Vote/roomVote';

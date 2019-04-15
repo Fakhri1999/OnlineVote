@@ -37,7 +37,7 @@
                                 <div class="container">
                                     <p class="lead">Vote Room List</p>
                                     <div class="row">
-                                        <?= $this->session->userdata('endvote'); ?>
+                                        <?= $this->session->flashdata('endvote'); ?>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table table-bordered">
@@ -82,7 +82,7 @@
                                     <form action="createVote" method="post">
                                         <div class="form-group">
                                             <label>Title</label>
-                                            <input type="text" class="form-control" name="title" placeholder="What food will bring tomorrow ?" required autofocus>
+                                            <input type="text" class="form-control" name="title" placeholder="What food will bring tomorrow ?" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Description</label>
@@ -99,19 +99,17 @@
                                             </div>
                                             <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <label>Candidate</label>
-                                                <input type="number" class="form-control" min="2" max="25" placeholder="2" required>
+                                                <input type="number" class="form-control" min="2" max="25" placeholder="2" id="numberOfCandidate" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="row">
-                                                <div class="col col-lg-12">
-                                                    <!-- <div class="p-3 card shadow-sm wow fadeIn">
+                                            <div class="row mt-3 mb-3 renderThis">
+                                                <!-- <div class="p-3 card shadow-sm wow fadeIn">
                                                         <div class="card-body">
                                                             Render Here
                                                         </div>
                                                         </div>
                                                     </div> -->
-                                                </div>
                                             </div>
                                             <div class="form-row mt-3">
                                                 <div class="col-md-12 text-right">

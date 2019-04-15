@@ -1,5 +1,23 @@
-$(document).on('ready', function () {
-   
+const baseUrl = window.location.origin + "/onlinevote/";
+
+$(document).ready(function () {
+   console.log(new Date())
+   $('#numberOfCandidate').on('input', function () {
+      let value = $('#numberOfCandidate').val()
+      let render = ''
+      if (value < 2 || value > 25) {
+         return false
+      }
+
+      for (let i = 0; i < parseInt(value); i++) {
+         render += `<div class="col col-4"><div class="card mx-1 mb-3 shadow-sm"><div class="card-body">${i}</div></div></div>`;
+      }
+      console.log(render)
+      $('.renderThis').html(render)
+
+
+
+   })
 })
 
 // Button func
