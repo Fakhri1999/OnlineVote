@@ -25,13 +25,18 @@ class Vote extends CI_Controller
         return $generatedCode;
     }
 
+    public function getCode()
+    {
+        echo $this->generateCode();
+    }
+
     public function createVote()
     {
         $insertData = array(
-            'judul' => $this->session->post('title'),
-            'deskripsi' => $this->session->post('description'),
-            'waktu_pembuatan' => $this->session->post('dateStart'),
-            'waktu_akhir' => $this->session->post('dateFinish'),
+            'judul' => $this->input->post('title'),
+            'deskripsi' => $this->input->post('description'),
+            'waktu_pembuatan' => $this->input->post('dateStart'),
+            'waktu_akhir' => $this->input->post('dateFinish'),
             'kode_room' => $this->generateCode()
         );
 
@@ -82,7 +87,7 @@ class Vote extends CI_Controller
             redirect('#vote');
         }
 
-        if($this->ModRoom->checkUserVoted($code)){
+        if ($this->ModRoom->checkUserVoted($code)) {
             // kalau user sudah vote
         }
 
