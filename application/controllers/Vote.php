@@ -10,7 +10,7 @@ class Vote extends CI_Controller
         if ($this->session->userdata('username') == null) {
             redirect('login');
         }
-        
+
         $this->load->model('ModRoom');
     }
 
@@ -42,7 +42,7 @@ class Vote extends CI_Controller
 
 
         $this->ModRoom->createVoteRoom($insertData);
-        $this->session->set_flashdata('createvote', '<div class="alert alert-success" role="alert"> Vote room succesfully created </div>');
+        $this->session->set_flashdata('createvote', '<div class="alert alert-success" role="alert"> Vote room successfully created </div>');
         redirect('User');
     }
 
