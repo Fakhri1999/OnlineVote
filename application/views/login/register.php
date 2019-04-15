@@ -74,32 +74,6 @@
     </script>
     <script src="./assets/js/wow.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-    <script>
-        $(document).ready(function() {
-            $("a").on('click', function(event) {
-                if (this.hash !== "") {
-                    event.preventDefault();
-                    var hash = this.hash;
-                    $('html, body').animate({
-                        scrollTop: $(hash).offset().top
-                    }, 1200, function() {
-                        window.location.hash = hash;
-                    });
-                }
-            });
-        });
-
-        // Animate & wow init
-        new WOW().init()
-
-        // Datepicker
-        $('#datepicker1').datepicker({
-            uiLibrary: 'bootstrap4'
-        });
-        $('#datepicker2').datepicker({
-            uiLibrary: 'bootstrap4'
-        });
-    </script>
 </body>
 
 </html>

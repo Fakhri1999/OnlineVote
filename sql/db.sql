@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2019 at 07:58 AM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.11
+-- Generation Time: Apr 14, 2019 at 12:53 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `pilihan` (
-  `id_pilihan` int(11) NOT NULL,
+  `id_pilihan` varchar(8) NOT NULL,
   `id_room` int(11) DEFAULT NULL,
   `nama_pilihan` varchar(50) NOT NULL,
   `foto` varchar(100) DEFAULT NULL
@@ -80,9 +80,9 @@ INSERT INTO `user` (`id_user`, `username`, `nama`, `password`, `email`) VALUES
 
 CREATE TABLE `voter` (
   `id_voter` int(11) NOT NULL,
-  `id_pilihan` int(11) DEFAULT NULL,
-  `id_room` int(11) DEFAULT NULL,
-  `id_user` int(11) DEFAULT NULL
+  `id_pilihan` varchar(8) NOT NULL,
+  `id_room` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -124,12 +124,6 @@ ALTER TABLE `voter`
 --
 
 --
--- AUTO_INCREMENT for table `pilihan`
---
-ALTER TABLE `pilihan`
-  MODIFY `id_pilihan` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
@@ -140,12 +134,6 @@ ALTER TABLE `room`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `voter`
---
-ALTER TABLE `voter`
-  MODIFY `id_voter` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

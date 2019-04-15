@@ -11,6 +11,7 @@ class ModLogin extends CI_Model {
     public function insert($data)
     {
         $this->db->insert('user', $data);
+        return $this->db->affected_rows() > 0 ? true : false;
     }
 
     public function getSpecific($data)
