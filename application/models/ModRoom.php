@@ -35,6 +35,25 @@ class ModRoom extends CI_Model
       return $this->db->get()->result();
    }
 
+   private function checkRoomId($code)
+   {
+      $this->db->select('id_room');
+      $this->db->from('room');
+      $this->db->where('kode_room', $code);
+      return $this->db->get()->result();
+   }
+
+   public function checkUserVoted($code)
+   {
+      $checkData = array(
+         'id_room' => $this->checkRoomId($code),
+         'id_user' => $this->session->userdata('id_user')
+      );
+
+      $query = $this->db->get_where('voter', $checkData);
+      return $query->num_rows > 0 ? true : false;
+   }
+
    public function endVoteRoom($code)
    {
       $this->db->set('active', '0');
