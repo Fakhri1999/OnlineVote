@@ -95,8 +95,6 @@ class Login extends CI_Controller
         }
     }
 
-    public function do_login()
-    { }
 }
 
 /* End of file Login.php */

@@ -4,8 +4,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class ModUser extends CI_Model
 {
 
-   public function editProfile()
-   { }
+   public function editProfile($data)
+   { 
+      $this->db->where('id_user', $this->session->userdata('id_user'));
+      $this->db->update('user', $data);
+   }
 
    public function getCountRoomCreated()
    {

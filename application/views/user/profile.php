@@ -5,6 +5,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
+                            <?= $this->session->flashdata('message'); ?>
                             <div class="col col-lg-8 text-dark">
                                 <p class="font-weight-normal">Name : <?= $this->session->userdata('name'); ?></p>
                                 <p class="font-weight-normal">Username : <?= $this->session->userdata('username'); ?></p>
