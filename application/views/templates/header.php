@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OnVot</title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css');?>">
-    <link rel="stylesheet" href="<?= base_url('assets/vendors/font-awesome-4.7.0/css/font-awesome.min.css');?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/main.css');?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/animate.css');?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/gijgo.min.css');?>">
-
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/vendors/font-awesome-4.7.0/css/font-awesome.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/main.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/animate.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/gijgo.min.css'); ?>">
+    
     <!-- Font import -->
+    <link href="<?= base_url('assets/fonts/gijgo-material.ttf');?>" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amaranth" rel="stylesheet">
-    <script src="<?= base_url('assets/js/sweetalert2@8.js');?>"></script>
+    <script src="<?= base_url('assets/js/sweetalert2@8.js'); ?>"></script>
 </head>
 
 <body>
@@ -36,13 +37,11 @@
                     <li class="nav-item">
                         <a class="nav-link navlinked" href="<?= site_url('#about'); ?>">About</a>
                     </li>
-                    <!-- If login -->
                     <?php if ($this->session->userdata('username') != null) : ?>
                         <li class="nav-item">
                             <a class="nav-link navlinked" href="user">Profile</a>
                         </li>
                         <a class="btn btn-outline-primary tombol pl-5 pr-5" href="logout">Logout</a>
-                        <!-- Else -->
                     <?php else : ?>
                         <a class="btn btn-outline-primary tombol pl-5 pr-5" href="login">Login</a>
                     <?php endif; ?>
