@@ -35,12 +35,14 @@ class Vote extends CI_Controller
             'kode_room' => $this->generateCode()
         );
 
-        // Loop buat ambil kandidat
-        // push tiap kandidat ke dalam array insertData
+        // do upload
 
-
-
-
+        $nameAll = $this->input->post('list[]');
+        echo json_encode(array(
+            'Identitas' => $insertData,
+            'pilihan' => $nameAll
+        ));
+        return;
         $this->ModRoom->createVoteRoom($insertData);
         $this->session->set_flashdata('createvote', '<div class="alert alert-success" role="alert"> Vote room successfully created </div>');
         redirect('User');
@@ -67,7 +69,7 @@ class Vote extends CI_Controller
         $re = '/^[\w|\d]{5}/';
 
         preg_match_all($re, $code, $matches, PREG_SET_ORDER, 0);
-        if(strlen($code) < 5){
+        if (strlen($code) < 5) {
             $this->session->set_flashdata('rooms', 'Please input the correct code');
             redirect('#vote');
         }

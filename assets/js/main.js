@@ -13,10 +13,10 @@ $(document).ready(function () {
       for (let i = 0; i < value; i++) {
          render += `<div class="col-md-4"><div class="card mx-1 mb-3 shadow-sm"><div class="card-body">`;
          // render += `<span class="col-lg-12"><input type="file" name="list[][file]"></span>`;
-         render += `<div class="custom-file mb-3"><input type="file" class="custom-file-input inputGroupFile" id="inputGroupFile">`;
+         render += `<div class="custom-file mb-3"><input type="file" class="custom-file-input inputGroupFile" name="list[${i}][file] id="inputGroupFile">`;
          render += `<label class="custom-file-label" for="inputGroupFile">Image files</label></div>`;
-         render += `<input class="col-lg" type="text" name="list[][nama]">`;
-         render += `<input type="hidden" name="list[][pilihan]" value=${generateCandidate()}>`;
+         render += `<input class="col-lg" type="text" name="list[${i}][nama]">`;
+         render += `<input type="hidden" name="list[${i}][pilihan]" value=${generateCandidate()}>`;
          render += `</div></div></div>`;
       }
       $('.renderThis').html(render)
