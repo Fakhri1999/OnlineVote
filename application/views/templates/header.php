@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/animate.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/gijgo.min.css'); ?>">
-    
+
     <!-- Font import -->
-    <link href="<?= base_url('assets/fonts/gijgo-material.ttf');?>" rel="stylesheet">
+    <link href="<?= base_url('assets/fonts/gijgo-material.ttf'); ?>" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amaranth" rel="stylesheet">
     <script src="<?= base_url('assets/js/sweetalert2@8.js'); ?>"></script>
 </head>
@@ -29,6 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarAtas">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
+                        <!-- <button class="nav-link navlinked" onclick="location.href='<?= site_url('#servis'); ?>'">Service</button> -->
                         <a class="nav-link navlinked" href="<?= site_url('home#servis'); ?>">Service</a>
                     </li>
                     <li class="nav-item">
