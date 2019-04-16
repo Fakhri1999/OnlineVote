@@ -32,7 +32,8 @@ class Vote extends CI_Controller
             'deskripsi' => $this->input->post('description'),
             'waktu_pembuatan' => $this->input->post('dateStart'),
             'waktu_akhir' => $this->input->post('dateFinish'),
-            'kode_room' => $this->generateCode()
+            'kode_room' => $this->generateCode(),
+            'candidate' => $this->input->post('list[]')
         );
 
         // do upload
@@ -72,6 +73,7 @@ class Vote extends CI_Controller
             'Identitas' => $insertData,
             'pilihan' => $nameAll
         ));
+        echo json_encode($insertData);
         return;
         $this->ModRoom->createVoteRoom($insertData);
         $this->session->set_flashdata('createvote', '<div class="alert alert-success" role="alert"> Vote room successfully created </div>');
