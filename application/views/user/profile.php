@@ -13,8 +13,8 @@
                                 <p class="font-weight-normal">Voted : <?= $voted; ?></p>
                             </div>
                             <div class="col col-lg-4 text-right">
-                                <button type="button" class="btn btn-md btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Edit Password</button>
-                                <button type="button" class="btn btn-md btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Edit Profile</button>
+                                <button type="button" class="btn btn-md btn-outline-secondary" data-toggle="modal" data-target="#exampleModal" data-sembarang="paswd" data-func="Password">Edit Password</button>
+                                <button type="button" class="btn btn-md btn-outline-secondary" data-toggle="modal" data-target="#exampleModal" data-sembarang="editprof" data-func="Profile">Edit Profile</button>
                             </div>
                         </div>
                     </div>
@@ -142,28 +142,30 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="" method="post">
-                    <table class="table table-borderless">
-                        <tbody>
-                            <tr>
-                                <td>Name</td>
-                                <td>: <input type="text" name="name" size="28" value="<?= $this->session->userdata('name'); ?>"></td>
-                            </tr>
-                            <tr>
-                                <td>Username</td>
-                                <td>: <input type="text" name="name" size="28" value="<?= $this->session->userdata('username'); ?>"></td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td>: <input type="text" name="name" size="28" value="<?= $this->session->userdata('email'); ?>"></td>
-                            </tr>                           
-                        </tbody>
-                    </table>                
+                    <form action="" method="post" id="formModal">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" id="rowOne"></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nameModal" name="nameModal" value="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" id="rowTwo"></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="usernameModal" name="usernameModal" value="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" id="rowThree"></label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="emailModal" name="emailModal" value="">
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="" type="button" class="btn btn-primary">Save changes</a>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>

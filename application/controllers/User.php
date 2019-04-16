@@ -32,4 +32,15 @@ class User extends CI_Controller
         $this->load->view('user/profile', $data);
         $this->load->view('templates/footer');
     }
+
+    public function getProfile()
+    {
+        $data = array(
+            'name' => $this->session->userdata('name'),
+            'username' => $this->session->userdata('username'),
+            'email' => $this->session->userdata('email')
+        );
+
+        echo json_encode($data);
+    }
 }
