@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/gijgo.min.css'); ?>">
 
     <!-- Font import -->
-    <link href="<?= base_url('assets/fonts/gijgo-material.ttf'); ?>" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Amaranth" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/fonts/gijgo-material.ttf'); ?>">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amaranth">
     <script src="<?= base_url('assets/js/sweetalert2@8.js'); ?>"></script>
 </head>
 

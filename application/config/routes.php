@@ -10,6 +10,7 @@ $route['default_controller'] = 'home';
 // Login Routing
 $route['login'] = 'Login';
 $route['register'] = 'Login/register';
+$route['forget'] = 'Login/forgetPassword';
 $route['logout'] = 'User/logout';
 
 // User Routing

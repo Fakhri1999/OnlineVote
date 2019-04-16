@@ -21,6 +21,7 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
         if ($this->form_validation->run() == false) {
+            $this->load->view('templates/login-header');
             $this->load->view('login/login');
         } else {
             // Jika pengisian form berhasil
@@ -53,9 +54,6 @@ class Login extends CI_Controller
         }
     }
 
-    public function login()
-    { }
-
     public function register()
     {
         $this->form_validation->set_rules('fullname', 'Fullname', 'trim|required');
@@ -67,6 +65,7 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('passwordconf', 'Password Confirmation', 'trim|required|matches[password]');
 
         if ($this->form_validation->run() == false) {
+            $this->load->view('templates/login-header');
             $this->load->view('login/register');
         } else {
             // Jika pengisian form berhasil
@@ -93,6 +92,24 @@ class Login extends CI_Controller
             }
             redirect('login');
         }
+    }
+
+    public function forgetPassword()
+    {
+        $this->form_validation->set_rules('username', 'Username', 'trim|required');
+        if($this->form_validation->run()==false){
+            $this->load->view('templates/login-header');
+            $this->load->view('login/forgetPassword');
+        } else {
+            // to be continued
+        }
+    }
+
+    private function sendEmail()
+    {
+        $config = [
+            // to be continued
+        ];
     }
 
 }

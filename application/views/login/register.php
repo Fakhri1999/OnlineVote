@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>OnVot</title>
-    <link rel="stylesheet" href="./assets/css/bootstrap.css">
-    <link rel="stylesheet" href="./assets/vendors/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./assets/css/main.css">
-    <link rel="stylesheet" href="./assets/css/animate.css">
-
-    <!-- Font import -->
-    <link href="https://fonts.googleapis.com/css?family=Amaranth" rel="stylesheet">
-</head>
-
-<body>
     <div class="container mt-5 text-center">
         <div class="card w-50 m-auto">
             <div class="card-body">
@@ -25,21 +7,21 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" name="fullname" placeholder="Fullname">
+                        <input type="text" class="form-control" name="fullname" placeholder="Fullname" value="<?= set_value('fullname');?>">
                     </div>
                     <small class="form-text text-danger"><?= form_error('fullname'); ?></small>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><strong>@</strong></span>
                         </div>
-                        <input type="text" class="form-control" name="username" placeholder="Username">
+                        <input type="text" class="form-control" name="username" placeholder="Username" value="<?= set_value('username');?>">
                     </div>
                     <small class="form-text text-danger"><?= form_error('username'); ?></small>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-address-book"></i></span>
                         </div>
-                        <input type="email" class="form-control" name="email" placeholder="Email">
+                        <input type="email" class="form-control" name="email" placeholder="Email" value="<?= set_value('email');?>">
                     </div>
                     <small class="form-text text-danger"><?= form_error('email'); ?></small>
                     <div class="input-group mb-3">
@@ -53,7 +35,6 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-lock"></i></span>
                         </div>
-                        <!-- error here -->
                         <input type="password" class="form-control" name="passwordconf" placeholder="Password Confirmation">
                     </div>
                     <small class="form-text text-danger"><?= form_error('passwordconf'); ?></small>
@@ -64,16 +45,7 @@
                 </form>
             </div>
         </div>
-
     </div>
-    <!-- Javascript libs -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 </body>
 
 </html>
