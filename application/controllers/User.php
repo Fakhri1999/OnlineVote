@@ -43,4 +43,9 @@ class User extends CI_Controller
 
         echo json_encode($data);
     }
+
+    public function editProfile()
+    {
+        if (isset($_POST['']))
+    }
 }
