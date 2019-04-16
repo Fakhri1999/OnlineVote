@@ -26,9 +26,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarAtas">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto text-white">
                     <li class="nav-item">
-                        <a class="nav-link navlinked" href="<?= site_url('home#servis'); ?>">Service</a>
+                    <!-- <a href="<?= site_url('home#servis'); ?>"><button class="remove_button_css">Klik here</button></a> -->
+                    <button class="text text-white remove_button_css" onClick="location.href='<?= site_url('home#servis'); ?>'">Klik here</button>
+                        <!-- <a class="nav-link navlinked" href="<?= site_url('home#servis'); ?>">Service</a> -->
                     </li>
                     <li class="nav-item">
                         <a class="nav-link navlinked" href="<?= site_url('#vote'); ?>">Vote</a>
