@@ -13,7 +13,9 @@ $route['register'] = 'Login/register';
 $route['logout'] = 'User/logout';
 
 // User Routing
-
+$route['getProfile'] = 'User/getProfile';
+$route['editProfile'] = 'User/editProfile';
+$route['editPassword'] = 'User/editPassword';
 
 // Room Vote Routing
 $route['room'] = 'Vote/roomVote';
