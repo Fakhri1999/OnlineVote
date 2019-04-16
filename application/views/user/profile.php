@@ -143,22 +143,21 @@
                 </div>
                 <div class="modal-body">
                 <form action="" method="post">
-                    <table class="table table-borderless">
-                        <tbody>
-                            <tr>
-                                <td>Name</td>
-                                <td>: <input type="text" name="name" size="28" value="<?= $this->session->userdata('name'); ?>"></td>
-                            </tr>
-                            <tr>
-                                <td>Username</td>
-                                <td>: <input type="text" name="name" size="28" value="<?= $this->session->userdata('username'); ?>"></td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td>: <input type="text" name="name" size="28" value="<?= $this->session->userdata('email'); ?>"></td>
-                            </tr>                           
-                        </tbody>
-                    </table>                
+                    <div class="form-group">
+                        <label>
+                            Name : 
+                            <input type="text" class="form-control" name="name" value="<?= $this->session->userdata('name'); ?>">
+                        </label>
+                    </div>
+
+                    <label>
+                        Username : 
+                        <input type="text" class="form-control" name="name" value="<?= $this->session->userdata('username'); ?>">
+                    </label>
+                    <label>
+                        Email : 
+                        <input type="email" class="form-control" name="name" value="<?= $this->session->userdata('email'); ?>">
+                    </label>              
                     </form>
                 </div>
                 <div class="modal-footer">
