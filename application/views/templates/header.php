@@ -29,8 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarAtas">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <!-- <button class="nav-link navlinked" onclick="location.href='<?= site_url('#servis'); ?>'">Service</button> -->
-                        <a class="nav-link navlinked" href="<?= site_url('home#servis'); ?>">Service</a>
+                        <a class="nav-link navlinked" href="<?= site_url('#servis'); ?>">Service</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link navlinked" href="<?= site_url('#vote'); ?>">Vote</a>
