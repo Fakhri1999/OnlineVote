@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OnVot</title>
-    <link rel="stylesheet" href="./assets/css/bootstrap.css">
-    <link rel="stylesheet" href="./assets/vendors/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./assets/css/main.css">
-    <link rel="stylesheet" href="./assets/css/animate.css">
-    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css');?>">
+    <link rel="stylesheet" href="<?= base_url('assets/vendors/font-awesome-4.7.0/css/font-awesome.min.css');?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/main.css');?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/animate.css');?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/gijgo.min.css');?>">
 
     <!-- Font import -->
     <link href="https://fonts.googleapis.com/css?family=Amaranth" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="<?= base_url('assets/js/sweetalert2@8.js');?>"></script>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" id="navbarAtas">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link navlinked" href="<?= site_url('#servis'); ?>">Service</a>
+                        <a class="nav-link navlinked" href="<?= site_url('home#servis'); ?>">Service</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link navlinked" href="<?= site_url('#vote'); ?>">Vote</a>
