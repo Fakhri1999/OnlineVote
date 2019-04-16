@@ -42,7 +42,7 @@ const endVote = (code) => {
 
 const roomDetail = (code) => window.location.replace(`roomDetails/${code}`)
 
-$('#exampleModal').on('shown.bs.modal', function (event) {
+$('#exampleModal').on('show.bs.modal', function (event) {
    // $('#myInput').trigger('focus')
    let btn = $(event.relatedTarget)
    $(this).find('.modal-title').text("Edit " + btn.data('func'));
@@ -53,25 +53,24 @@ $('#exampleModal').on('shown.bs.modal', function (event) {
    if (cond == 'paswd') {
       $('#formModal').attr('action', 'editPassword')
       $('#rowOne').html('Old Password')
-      $('#nameModal').val('')
+      $('#inputOne').val('').attr('type', 'password')
       $('#rowTwo').html('New Password')
-      $('#usernameModal').val('')
+      $('#inputTwo').val('').attr('type', 'password')
       $('#rowThree').html('Confirm Password')
-      $('#emailModal').val('')
+      $('#inputThree').val('').attr('type', 'password')
    } else {
       $('#formModal').attr('action', 'editProfile')
       $('#rowOne').html('Name')
       $('#rowTwo').html('Username')
       $('#rowThree').html('Email')
-
       $.ajax({
          url: baseUrl + "getProfile",
          method: "GET",
          success: function (data) {
             let result = JSON.parse(data)
-            $('#nameModal').val(result.name)
-            $('#usernameModal').val(result.username)
-            $('#emailModal').val(result.email)
+            $('#inputOne').val(result.name).attr('type', 'text')
+            $('#inputTwo').val(result.username).attr('type', 'text')
+            $('#inputThree').val(result.email).attr('type', 'text')
          }
       })
    }
