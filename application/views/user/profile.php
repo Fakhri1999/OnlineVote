@@ -142,24 +142,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-<<<<<<< HEAD
-                <form action="" method="post">
-                    <div class="form-group">
-                        <label>
-                            Name : 
-                            <input type="text" class="form-control" name="name" value="<?= $this->session->userdata('name'); ?>">
-                        </label>
-                    </div>
-
-                    <label>
-                        Username : 
-                        <input type="text" class="form-control" name="name" value="<?= $this->session->userdata('username'); ?>">
-                    </label>
-                    <label>
-                        Email : 
-                        <input type="email" class="form-control" name="name" value="<?= $this->session->userdata('email'); ?>">
-                    </label>              
-=======
                     <form action="" method="post" id="formModal">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" id="rowOne"></label>
@@ -179,7 +161,6 @@
                                 <input type="email" class="form-control" id="emailModal" name="emailModal" value="">
                             </div>
                         </div>
->>>>>>> 0af33b565b2274bc9601cef3be023ed75a84a04e
                     </form>
                 </div>
                 <div class="modal-footer">
