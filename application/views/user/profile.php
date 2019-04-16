@@ -146,19 +146,19 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" id="rowOne"></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nameModal" name="nameModal" value="">
+                                <input type="text" class="form-control" id="inputOne" name="inputOne" value="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" id="rowTwo"></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="usernameModal" name="usernameModal" value="">
+                                <input type="text" class="form-control" id="inputTwo" name="inputTwo" value="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" id="rowThree"></label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="emailModal" name="emailModal" value="">
+                                <input type="email" class="form-control" id="inputThree" name="inputThree" value="" required>
                             </div>
                         </div>
                         <div class="float-right">
