@@ -39,3 +39,7 @@ const endVote = (code) => {
 }
 
 const roomDetail = (code) => window.location.replace(`roomDetails/${code}`)
+
+$('#myModal').on('shown.bs.modal', function () {
+   $('#myInput').trigger('focus')
+ })
