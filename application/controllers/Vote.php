@@ -36,44 +36,34 @@ class Vote extends CI_Controller
             'candidate' => $this->input->post('list[]')
         );
 
-        // do upload
         $config['upload_path']      = realpath(APPPATH . '../bukti-bayar/');
         $config['allowed_types']    = 'png|jpeg|jpg';
         $config['file_name']        = $this->session->userdata('username');
         $config['remove_spaces']    = true;
         $config['overwrite']        = true;
         $config['max_sizes']        = '512';
+        $config['max_width']        = '1080';
+        $config['max_height']       = '1080';
 
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload('file')) {
             $error = $this->upload->display_errors();
-            $this->session->set_flashdata('message', '<div class="alert alert-danger pb-0" role="alert">
-            '.$error.'.            
+            $this->session->set_flashdata('uploadFile', '<div class="alert alert-danger pb-0" role="alert">
+            ' . $error . '.            
             </div>');
-            redirect('user/upload');
+            redirect('');
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            $this->session->set_flashdata('uploadFile', '<div class="alert alert-success" role="alert">
             Your file has been succesfully uploaded.
             </div>');
-            $where = [
-                'username' => $this->session->userdata('username')
-            ];
-            $update = [
-                'bukti_bayar' => $this->upload->data()['file_name']
-            ];
-            $this->loginModel->update_data($where, $update);
 
-            redirect('user/upload');
+            redirect('');
         }
-        // end do upload
 
-        $nameAll = $this->input->post('list[]');
         echo json_encode(array(
-            'Identitas' => $insertData,
-            'pilihan' => $nameAll
+            'identitas' => $insertData,
         ));
-        echo json_encode($insertData);
         return;
         $this->ModRoom->createVoteRoom($insertData);
         $this->session->set_flashdata('createvote', '<div class="alert alert-success" role="alert"> Vote room successfully created </div>');

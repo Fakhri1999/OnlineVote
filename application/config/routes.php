@@ -14,6 +14,7 @@ $route['forget'] = 'Login/forgetPassword';
 $route['logout'] = 'User/logout';
 
 // User Routing
+$route['user'] = 'User';
 $route['getProfile'] = 'User/getProfile';
 $route['editProfile'] = 'User/editProfile';
 $route['editPassword'] = 'User/editPassword';
