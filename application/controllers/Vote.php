@@ -12,6 +12,7 @@ class Vote extends CI_Controller
         }
 
         $this->load->model('ModRoom');
+        $this->load->library('upload');
     }
 
     private function generateCode()
@@ -25,6 +26,20 @@ class Vote extends CI_Controller
         return $generatedCode;
     }
 
+    private function uploadConfig()
+    {
+        $config['upload_path']      = './uploads/images/';
+        $config['allowed_types']    = 'png|jpeg|jpg';
+        $config['file_name']        = $insertData['kode_room'];
+        $config['remove_spaces']    = true;
+        $config['overwrite']        = true;
+        $config['max_sizes']        = '512';
+        $config['max_width']        = '1080';
+        $config['max_height']       = '1080';
+
+        return $config;
+    }
+
     public function createVote()
     {
         $insertData = array(
@@ -36,34 +51,27 @@ class Vote extends CI_Controller
             'candidate' => $this->input->post('list[]')
         );
 
-        $config['upload_path']      = realpath(APPPATH . '../bukti-bayar/');
-        $config['allowed_types']    = 'png|jpeg|jpg';
-        $config['file_name']        = $insertData['kode_room'];
-        $config['remove_spaces']    = true;
-        $config['overwrite']        = true;
-        $config['max_sizes']        = '512';
-        $config['max_width']        = '1080';
-        $config['max_height']       = '1080';
+        // $this->upload->initialize($this->uploadConfig());
 
-        $this->load->library('upload', $config);
+        for ($i = 0; $i < sizeof($insertData['candidate']); $i++) {
 
-        if (!$this->upload->do_upload('file')) {
-            $error = $this->upload->display_errors();
-            $this->session->set_flashdata('uploadFile', '<div class="alert alert-danger pb-0" role="alert">
-            ' . $error . '.            
-            </div>');
-            redirect('');
-        } else {
-            $this->session->set_flashdata('uploadFile', '<div class="alert alert-success" role="alert">
-            Your file has been succesfully uploaded.
-            </div>');
+            $foto = "list[{$i}][foto]";
 
-            redirect('');
+            if (!$this->upload->do_upload($foto)) {
+                $error = $this->upload->display_errors();
+                $this->session->set_flashdata('uploadFile', '<div class="alert alert-danger pb-0" role="alert">
+                ' . $error . '.            
+                </div>');
+
+                return;
+            }
+
+            $this->session->set_flashdata('uploadFile', '<div class="alert alert-success" role="alert">Your file has been succesfully uploaded.</div>');
         }
 
-        echo json_encode(array(
-            'identitas' => $insertData,
-        ));
+        // echo json_encode(array(
+        //     'identitas' => $insertData,
+        // ));
         return;
         $this->ModRoom->createVoteRoom($insertData);
         $this->session->set_flashdata('createvote', '<div class="alert alert-success" role="alert"> Vote room successfully created </div>');
