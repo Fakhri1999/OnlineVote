@@ -38,7 +38,7 @@ class Vote extends CI_Controller
 
         $config['upload_path']      = realpath(APPPATH . '../bukti-bayar/');
         $config['allowed_types']    = 'png|jpeg|jpg';
-        $config['file_name']        = $this->session->userdata('username');
+        $config['file_name']        = $insertData['kode_room'];
         $config['remove_spaces']    = true;
         $config['overwrite']        = true;
         $config['max_sizes']        = '512';

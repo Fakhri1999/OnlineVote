@@ -82,7 +82,7 @@
                             <div class="row">
                                 <div class="container">
                                     <p class="lead">Room Vote Creation</p>
-                                    <form action="createVote" method="post">
+                                    <form action="createVote" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label>Title</label>
                                             <input type="text" class="form-control" name="title" placeholder="What food will bring tomorrow ?" required>
