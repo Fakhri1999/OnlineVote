@@ -30,7 +30,6 @@ class Vote extends CI_Controller
     {
         $config['upload_path']      = './uploads/images/';
         $config['allowed_types']    = 'png|jpeg|jpg';
-        $config['file_name']        = $insertData['kode_room'];
         $config['remove_spaces']    = true;
         $config['overwrite']        = true;
         $config['max_sizes']        = '512';
@@ -51,27 +50,26 @@ class Vote extends CI_Controller
             'candidate' => $this->input->post('list[]')
         );
 
-        // $this->upload->initialize($this->uploadConfig());
+        $this->upload->initialize($this->uploadConfig($insertData));
 
         for ($i = 0; $i < sizeof($insertData['candidate']); $i++) {
 
-            $foto = "list[{$i}][foto]";
+            $file = $this->input->post("list[{$i}][foto]");
 
-            if (!$this->upload->do_upload($foto)) {
+            if (!$this->upload->do_upload($file)) {
                 $error = $this->upload->display_errors();
-                $this->session->set_flashdata('uploadFile', '<div class="alert alert-danger pb-0" role="alert">
-                ' . $error . '.            
-                </div>');
-
-                return;
+                $this->session->set_flashdata('uploadFile', '<div class="alert alert-danger pb-0" role="alert">' . $error . '.</div>');
+                echo 'error';
+            } else {
+                $this->session->set_flashdata('uploadFile', '<div class="alert alert-success" role="alert">Your file has been succesfully uploaded.</div>');
+                echo $this->upload->data();
             }
-
-            $this->session->set_flashdata('uploadFile', '<div class="alert alert-success" role="alert">Your file has been succesfully uploaded.</div>');
         }
 
         // echo json_encode(array(
         //     'identitas' => $insertData,
         // ));
+
         return;
         $this->ModRoom->createVoteRoom($insertData);
         $this->session->set_flashdata('createvote', '<div class="alert alert-success" role="alert"> Vote room successfully created </div>');
