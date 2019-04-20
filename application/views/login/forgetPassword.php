@@ -11,7 +11,7 @@
                         <input type="text" class="form-control" name="username" placeholder="Username">
                     </div>
                     <small class="form-text text-danger"><?= form_error('username'); ?></small>
-                    <button class="btn btn-primary col col-lg-12 p-1 mb-2 mt-1" type="submit">Login</button>
+                    <button class="btn btn-primary col col-lg-12 p-1 mb-2 mt-1" type="submit">Continue</button>
                     <div>
                         <small>Back to login? <a href="login">Click here</a></small>
                     </div>

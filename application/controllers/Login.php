@@ -11,7 +11,7 @@ class Login extends CI_Controller
         if ($this->session->userdata('username') != null) {
             redirect('');
         }
-        
+
         $this->load->model('ModLogin');
     }
 
@@ -25,14 +25,10 @@ class Login extends CI_Controller
             $this->load->view('login/login');
         } else {
             // Jika pengisian form berhasil
-            $username = strtolower($this->input->post('username'));
-            $password = sha1($this->input->post('password'));
-
             $data = [
-                'username' => $username,
-                'password' => $password
+                'username' => strtolower($this->input->post('username')),
+                'password' => sha1($this->input->post('password'))
             ];
-
             $result = $this->ModLogin->getSpecific($data);
             if ($result) {
                 // Jika username dan password ada di database
@@ -67,17 +63,13 @@ class Login extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/login-header');
             $this->load->view('login/register');
-        } else {
             // Jika pengisian form berhasil
-            $username = strtolower($this->input->post('username'));
-            $fullname = $this->input->post('fullname');
-            $email = $this->input->post('email');
-            $password = sha1($this->input->post('password'));
+        } else {
             $data = [
-                'username' => $username,
-                'nama' => $fullname,
-                'password' => $password,
-                'email' => $email
+                'username' => strtolower($this->input->post('username')),
+                'nama' => $this->input->post('fullname'),
+                'password' => $this->input->post('email'),
+                'email' => sha1($this->input->post('password'))
             ];
 
             $result = $this->ModLogin->insert($data);
@@ -97,21 +89,99 @@ class Login extends CI_Controller
     public function forgetPassword()
     {
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
-        if($this->form_validation->run()==false){
+        if ($this->form_validation->run() == false) {
             $this->load->view('templates/login-header');
             $this->load->view('login/forgetPassword');
         } else {
-            // to be continued
+            $data = [
+                'username' => strtolower($this->input->post('username'))
+            ];
+
+            $result = $this->ModLogin->getSpecific($data);
+
+            if ($result) {
+                if ($this->sendEmail($result)) {
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                    We have send an email to your email address. Please follow the instruction in that email.
+                    </div>');
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    Send recovery email failed. Please contact our support at <b>admin@onlinevote.com</b>
+                    </div>');
+                }
+                // return;
+                redirect('login');
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                Username incorrect. Please use the correct username.
+                </div>');
+                redirect('forget');
+            }
         }
     }
 
-    private function sendEmail()
+    private function sendEmail($data)
     {
         $config = [
-            // to be continued
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'no.reply.tcrb@gmail.com',
+            'smtp_pass' => 'apayaenaknya123',
+            'smtp_port' => 465,
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'newline'   => "\r\n"
         ];
+        $kode = md5('voting' . $data['password']);
+        $this->ModLogin->setExp($data['id_user'], $kode);
+        // echo $data['email'];
+        // return;
+        $this->load->library('email', $config);
+        $this->email->from('no.reply.tcrb@gmail.com', 'Online Vote');
+        $this->email->to($data['email']);
+        $this->email->subject('Reset Password');
+        $this->email->message("Click <a href='".base_url('reset/'.$kode)."'>this link</a> to reset your password");
+        return $this->email->send() ? true : false;
     }
 
+    public function resetPassword($kode)
+    {
+        if (isset($kode)) {
+            $result = $this->ModLogin->verifyKode($kode);
+            // Jika kode yang dimasukkan di url benar
+            if ($result) {
+                $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passwordConf]');
+                $this->form_validation->set_rules('passwordConf', 'Password confirmation', 'trim|required|matches[password]');
+                if ($this->form_validation->run() == false) {
+                    $data = [
+                        'kode' => $kode
+                    ];
+                    $this->load->view('templates/login-header');
+                    $this->load->view('login/resetPassword', $data);
+                } else {
+                    $data = [
+                        'password' => sha1($this->input->post('password'))
+                    ];
+
+                    $this->ModLogin->resetPassword($result['id_user'], $data);
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    Your password has been updated! You can login with your new password.
+                    </div>');
+                    redirect('login');
+                }
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                Your link has expired or incorrect. Please request a new one.
+                </div>');
+                redirect('login');
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Your link has expired or incorrect. Please request a new one.
+            </div>');
+            redirect('login');
+        }
+    }
 }
 
 /* End of file Login.php */

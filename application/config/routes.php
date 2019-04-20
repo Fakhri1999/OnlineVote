@@ -11,6 +11,7 @@ $route['default_controller'] = 'home';
 $route['login'] = 'Login';
 $route['register'] = 'Login/register';
 $route['forget'] = 'Login/forgetPassword';
+$route['reset/(:any)'] = 'Login/resetPassword/$1';
 $route['logout'] = 'User/logout';
 
 // User Routing

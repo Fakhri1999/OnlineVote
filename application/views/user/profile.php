@@ -14,7 +14,6 @@
                                 <p class="font-weight-normal">Voted : <?= $voted; ?></p>
                             </div>
                             <div class="col col-lg-4 text-right">
-                                <button class="btn btn-link" onClick="location.href='<?= site_url('home#servis'); ?>'">Klik here</button>
                                 <button type="button" class="btn btn-md btn-outline-secondary" data-toggle="modal" data-target="#exampleModal" data-sembarang="paswd" data-func="Password">Edit Password</button>
                                 <button type="button" class="btn btn-md btn-outline-secondary" data-toggle="modal" data-target="#exampleModal" data-sembarang="editprof" data-func="Profile">Edit Profile</button>
                             </div>
