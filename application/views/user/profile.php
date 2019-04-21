@@ -39,7 +39,7 @@
                                 <div class="container">
                                     <p class="lead">Vote Room List</p>
                                     <div class="row">
-                                        <?= $this->session->flashdata('endvote'); ?>
+                                        <div class="col-12"><?= $this->session->flashdata('voteNow'); ?></div>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table table-bordered">
@@ -49,6 +49,7 @@
                                                 <th>Name</th>
                                                 <th>Start at</th>
                                                 <th>End at</th>
+                                                <th>Status</th>
                                                 <th>Option</th>
                                             </thead>
                                             <tbody class="text-center">
@@ -59,13 +60,24 @@
                                                     ?>
                                                     <tr>
                                                         <td><?= $no; ?></td>
-                                                        <td><?= $sql->kode_room; ?></td>
-                                                        <td><?= $sql->judul; ?></td>
-                                                        <td><?= $sql->waktu_pembuatan; ?></td>
-                                                        <td><?= $sql->waktu_akhir; ?></td>
+                                                        <td><?= $value->kode_room; ?></td>
+                                                        <td><?= $value->judul; ?></td>
+                                                        <td><?= $value->waktu_pembuatan; ?></td>
+                                                        <td><?= $value->waktu_akhir; ?></td>
                                                         <td>
-                                                            <button class="btn btn-sm btn-outline-primary mb-1 mr-1" onClick="roomDetail('<?= $sql->kode_room; ?>')"><i class="fa fa-list"></i> Details</button>
-                                                            <button class="btn btn-sm btn-outline-danger mb-1" onClick="endVote('<?= $sql->kode_room; ?>')"><i class="fa fa-times"></i> End Vote</button>
+                                                            <?php if ($value->active) : ?>
+                                                                <button disabled="disabled" class="btn btn-sm btn-success">Active</button>
+                                                            <?php else : ?>
+                                                                <button disabled="disabled" class="btn btn-sm btn-secondary">Inactive</button>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-outline-primary mb-1 mr-1" onClick="roomDetail('<?= $value->kode_room; ?>')"><i class="fa fa-list"></i> Details</button>
+                                                            <?php if ($value->active) : ?>
+                                                                <button class="btn btn-sm btn-outline-danger mb-1" onClick="endVote('<?= $value->kode_room; ?>')"><i class="fa fa-times"></i> End Vote</button>
+                                                            <?php else : ?>
+                                                                <button class="btn btn-sm btn-outline-primary mb-1" onClick="startVote('<?= $value->kode_room; ?>')"><i class="fa fa-check"></i> Start Vote</button>
+                                                            <?php endif; ?>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>

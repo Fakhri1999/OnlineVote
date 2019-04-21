@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2019 at 12:53 PM
+-- Generation Time: Apr 21, 2019 at 07:45 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -30,9 +30,31 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `pilihan` (
   `id_pilihan` varchar(8) NOT NULL,
-  `id_room` int(11) DEFAULT NULL,
+  `kode_room` varchar(5) NOT NULL,
   `nama_pilihan` varchar(50) NOT NULL,
   `foto` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pilihan`
+--
+
+INSERT INTO `pilihan` (`id_pilihan`, `kode_room`, `nama_pilihan`, `foto`) VALUES
+('akGE39sG', 'lBESm', 'Fakhri', ''),
+('gPsamkkO', 'lBESm', 'Aldi', ''),
+('s4Jk3f83', 'lBESm', 'Ilham', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recovery`
+--
+
+CREATE TABLE `recovery` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `kode` varchar(60) DEFAULT NULL,
+  `expired` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -47,9 +69,17 @@ CREATE TABLE `room` (
   `judul` varchar(50) NOT NULL,
   `deskripsi` text,
   `kode_room` varchar(5) NOT NULL,
-  `waktu_pembuatan` datetime DEFAULT NULL,
-  `waktu_akhir` datetime DEFAULT NULL
+  `waktu_pembuatan` date DEFAULT NULL,
+  `waktu_akhir` date DEFAULT NULL,
+  `active` bit(1) NOT NULL DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `room`
+--
+
+INSERT INTO `room` (`id_room`, `id_user`, `judul`, `deskripsi`, `kode_room`, `waktu_pembuatan`, `waktu_akhir`, `active`) VALUES
+(6, 3, 'Pemilihan Presiden BEM', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'lBESm', '2019-04-22', '2019-04-26', b'1');
 
 -- --------------------------------------------------------
 
@@ -70,7 +100,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `nama`, `password`, `email`) VALUES
-(2, 'fakhri', 'Muhammad Fakhri Imaduddin', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'fakhriimaduddin19@gmail.com');
+(2, 'fakhri', 'Muhammad Fakhri Imaduddin', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'fakhriimaduddin19@gmail.com'),
+(3, 'aldiwildan', 'Muhammad Wildan Aldiansyah', '8e756c9f2b15da6a63f84852fc39667617523133', 'aldiwild77@gmail.com'),
+(4, 'hamandil', 'Ilham Andriansah', '8e756c9f2b15da6a63f84852fc39667617523133', 'ilhamandri@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -81,9 +113,17 @@ INSERT INTO `user` (`id_user`, `username`, `nama`, `password`, `email`) VALUES
 CREATE TABLE `voter` (
   `id_voter` int(11) NOT NULL,
   `id_pilihan` varchar(8) NOT NULL,
-  `id_room` int(11) NOT NULL,
+  `kode_room` varchar(5) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `voter`
+--
+
+INSERT INTO `voter` (`id_voter`, `id_pilihan`, `kode_room`, `id_user`) VALUES
+(1, 'akGE39sG', 'lBESm', 3),
+(3, 'gPsamkkO', 'lBESm', 4);
 
 --
 -- Indexes for dumped tables
@@ -94,7 +134,14 @@ CREATE TABLE `voter` (
 --
 ALTER TABLE `pilihan`
   ADD PRIMARY KEY (`id_pilihan`),
-  ADD KEY `id_room` (`id_room`);
+  ADD KEY `kode_room` (`kode_room`);
+
+--
+-- Indexes for table `recovery`
+--
+ALTER TABLE `recovery`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `room`
@@ -116,7 +163,7 @@ ALTER TABLE `user`
 ALTER TABLE `voter`
   ADD PRIMARY KEY (`id_voter`),
   ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_room` (`id_room`),
+  ADD KEY `kode_room` (`kode_room`),
   ADD KEY `id_pilihan` (`id_pilihan`);
 
 --
@@ -124,16 +171,28 @@ ALTER TABLE `voter`
 --
 
 --
+-- AUTO_INCREMENT for table `recovery`
+--
+ALTER TABLE `recovery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `id_room` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_room` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `voter`
+--
+ALTER TABLE `voter`
+  MODIFY `id_voter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -143,7 +202,13 @@ ALTER TABLE `user`
 -- Constraints for table `pilihan`
 --
 ALTER TABLE `pilihan`
-  ADD CONSTRAINT `pilihan_ibfk_1` FOREIGN KEY (`id_room`) REFERENCES `room` (`id_room`);
+  ADD CONSTRAINT `pilihan_ibfk_1` FOREIGN KEY (`kode_room`) REFERENCES `room` (`kode_room`);
+
+--
+-- Constraints for table `recovery`
+--
+ALTER TABLE `recovery`
+  ADD CONSTRAINT `recovery_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
 -- Constraints for table `room`
@@ -156,7 +221,7 @@ ALTER TABLE `room`
 --
 ALTER TABLE `voter`
   ADD CONSTRAINT `voter_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
-  ADD CONSTRAINT `voter_ibfk_2` FOREIGN KEY (`id_room`) REFERENCES `room` (`id_room`),
+  ADD CONSTRAINT `voter_ibfk_2` FOREIGN KEY (`kode_room`) REFERENCES `room` (`kode_room`),
   ADD CONSTRAINT `voter_ibfk_3` FOREIGN KEY (`id_pilihan`) REFERENCES `pilihan` (`id_pilihan`);
 COMMIT;
 

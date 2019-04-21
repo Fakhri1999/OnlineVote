@@ -60,4 +60,13 @@
                 timer: 5000,
             });
         </script>
+    <?php elseif ($this->session->flashdata('voted')) : ?>
+        <script>
+            swal.fire({
+                type: 'success',
+                title: "<?= $this->session->flashdata('voted'); ?>",
+                button: false,
+                timer: 5000,
+            });
+        </script>
     <?php endif; ?>

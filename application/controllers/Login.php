@@ -68,8 +68,8 @@ class Login extends CI_Controller
             $data = [
                 'username' => strtolower($this->input->post('username')),
                 'nama' => $this->input->post('fullname'),
-                'password' => $this->input->post('email'),
-                'email' => sha1($this->input->post('password'))
+                'email' => $this->input->post('email'),
+                'password' => sha1($this->input->post('password'))
             ];
 
             $result = $this->ModLogin->insert($data);

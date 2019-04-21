@@ -12,7 +12,6 @@ class Vote extends CI_Controller
         }
 
         $this->load->model('ModRoom');
-        $this->load->library('upload');
     }
 
     private function generateCode()
@@ -26,52 +25,68 @@ class Vote extends CI_Controller
         return $generatedCode;
     }
 
-    private function uploadConfig()
+    private function generateNameImage()
     {
+        $listed = "0123456789abcdefghijklmnopqrstuvwxyz";
+        $generatedImage = '';
+        for ($i = 0; $i < 10; $i++) {
+            $generatedCode .= substr($listed, rand(0, strlen($listed) - 1), 1);
+        }
+
+        return $generatedImage;
+    }
+
+    private function uploadImages($filename)
+    {
+        // BELUM FIX
         $config['upload_path']      = './uploads/images/';
         $config['allowed_types']    = 'png|jpeg|jpg';
         $config['remove_spaces']    = true;
         $config['overwrite']        = true;
         $config['max_sizes']        = '512';
-        $config['max_width']        = '1080';
-        $config['max_height']       = '1080';
+        // $config['max_width']        = '1080';
+        // $config['max_height']       = '1080';
 
-        return $config;
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload($filename)) {
+            $error = array('error' => $this->upload->display_errors());
+            return false;
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+            return true;
+        }
     }
 
     public function createVote()
     {
+        $roomCode = $this->generateCode();
+        $start = strtotime($this->input->post('dateStart'));
+        $finish = strtotime($this->input->post('dateFinish'));
+
         $insertData = array(
             'judul' => $this->input->post('title'),
+            'id_user' => $this->session->userdata('id_user'),
             'deskripsi' => $this->input->post('description'),
-            'waktu_pembuatan' => $this->input->post('dateStart'),
-            'waktu_akhir' => $this->input->post('dateFinish'),
-            'kode_room' => $this->generateCode(),
-            'candidate' => $this->input->post('list[]')
+            'waktu_pembuatan' => date('Y-m-d', $start),
+            'waktu_akhir' => date('Y-m-d', $finish),
+            'kode_room' => $roomCode,
         );
 
-        $this->upload->initialize($this->uploadConfig($insertData));
+        $pilihan = array();
 
-        for ($i = 0; $i < sizeof($insertData['candidate']); $i++) {
+        for ($i = 0; $i < sizeof($this->input->post('list[]')); $i++) {
+            $pilihanData = array(
+                'id_pilihan' => $this->input->post("list[{$i}][id_pilihan]"),
+                'kode_room' => $roomCode,
+                'nama_pilihan' => $this->input->post("list[{$i}][nama_pilihan]"),
+                'foto' => $this->input->post("list[{$i}][foto]")
+            );
 
-            $file = $this->input->post("list[{$i}][foto]");
-
-            if (!$this->upload->do_upload($file)) {
-                $error = $this->upload->display_errors();
-                $this->session->set_flashdata('uploadFile', '<div class="alert alert-danger pb-0" role="alert">' . $error . '.</div>');
-                echo 'error';
-            } else {
-                $this->session->set_flashdata('uploadFile', '<div class="alert alert-success" role="alert">Your file has been succesfully uploaded.</div>');
-                echo $this->upload->data();
-            }
+            array_push($pilihan, $pilihanData);
         }
 
-        // echo json_encode(array(
-        //     'identitas' => $insertData,
-        // ));
-
-        return;
-        $this->ModRoom->createVoteRoom($insertData);
+        $this->ModRoom->createVoteRoom($insertData, $pilihan);
         $this->session->set_flashdata('createvote', '<div class="alert alert-success" role="alert"> Vote room successfully created </div>');
         redirect('User');
     }
@@ -80,14 +95,21 @@ class Vote extends CI_Controller
     {
         $data['room'] = $this->ModRoom->loadSpecificRoom($code);
         $this->load->view('templates/header');
-        $this->load->view('room/detail', $data);
+        $this->load->view('vote/detail', $data);
         $this->load->view('templates/footer');
     }
 
     public function endVoteNow($code)
     {
         $this->ModRoom->endVoteRoom($code);
-        $this->session->set_flashdata('endvote', '<div class="alert alert-success" role="alert"> Vote room is closed </div>');
+        $this->session->set_flashdata('voteNow', '<div class="alert alert-success" role="alert"> Vote room is closed </div>');
+        redirect('User');
+    }
+
+    public function startVoteNow($code)
+    {
+        $this->ModRoom->startVoteRoom($code);
+        $this->session->set_flashdata('voteNow', '<div class="alert alert-success" role="alert"> Vote room is started </div>');
         redirect('User');
     }
 
@@ -117,15 +139,28 @@ class Vote extends CI_Controller
             redirect('#vote');
         }
 
-        if (!$this->ModRoom->checkUserVoted($code)) {
+        if ($this->ModRoom->checkUserVoted($code)) {
             $this->session->set_flashdata('rooms', 'Sorry, You\'ve already voted');
             redirect('#vote');
         }
 
         $data['sql'] = $this->ModRoom->loadSpecificRoom($code);
         $this->load->view('templates/header');
-        $this->load->view('room/vote', $data);
+        $this->load->view('vote/vote', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function submitVote()
+    {
+        $insertData = array(
+          'id_pilihan' => $this->input->post('candidateVote'),
+          'kode_room' => $this->input->post('kode_room'),
+          'id_user' => $this->session->userdata('id_user') 
+        );
+
+        $this->ModRoom->insertVoter($insertData);
+        $this->session->set_flashdata('voted', 'Thanks for voting');
+        redirect('');
     }
 }
 

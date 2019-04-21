@@ -1,15 +1,15 @@
 <section class="container mt-3 mb-3">
     <div class="row">
         <div class="col col-lg-12">
-            <form action="" method="get">
+            <form action="submitVote" method="post">
                 <div class="p-3 card shadow-sm wow fadeIn">
                     <div class="card-body">
                         <div class="row fadeIn">
-                            <h2>Title Here</h2>
-                            <p class="lead">
-                                a website that provides voting rooms. With registering you can
-                                make your own voting room according to your desire and get your own unique code.
-                            </p>
+                            <input type="hidden" name="kode_room" value="<?= $sql[0]->kode_room; ?>">
+                            <h2><?= $sql[0]->judul; ?></h2>
+                        </div>
+                        <div class="row">
+                            <p><?= $sql[0]->deskripsi; ?></p>
                         </div>
                         <div class="row wow fadeInUp">
                             <?php foreach ($sql as $value) : ?>
@@ -17,20 +17,10 @@
                                     <div class="card mx-1 mb-3 shadow-sm">
                                         <div class="card-body">
                                             <!-- <img src="./assets/image/people/1.jpg" alt=""> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card mx-1 mb-3 shadow-sm">
-                                        <div class="card-body">
-                                            <!-- <img src="./assets/image/people/2.jpg" alt=""> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card mx-1 mb-3 shadow-sm">
-                                        <div class="card-body">
-                                            <!-- <img src="./assets/image/people/3.jpg" alt=""> -->
+                                            <div class="text-center">
+                                                <input type="radio" name="candidateVote" value="<?= $value->id_pilihan; ?>">
+                                                <label>&nbsp; <?= $value->nama_pilihan; ?></label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

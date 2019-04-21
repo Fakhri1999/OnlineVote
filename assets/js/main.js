@@ -34,8 +34,14 @@ function generateCandidate() {
 
 // Button func
 const endVote = (code) => {
-   if (confirm(`Are you sure want to end vote room ${code} ?`)) {
+   if (confirm(`Are you sure want to end vote for room ${code} ?`)) {
       window.location.replace(`endVote/${code}`)
+   }
+}
+
+const startVote = (code) => {
+   if (confirm(`Are you sure want to start vote for room ${code} ?`)) {
+      window.location.replace(`startVote/${code}`)
    }
 }
 
