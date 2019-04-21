@@ -28,11 +28,12 @@
 </footer>
 
 <!-- Javascript libs -->
-<script src="<?= base_url('assets/js/jquery.min.js');?>"></script>
-<script src="<?= base_url('assets/js/popper.min.js');?>"></script>
-<script src="<?= base_url('assets/js/bootstrap.min.js');?>"></script>
-<script src="<?= base_url('assets/js/wow.min.js');?>"></script>
-<script src="<?= base_url('assets/js/gijgo.min.js');?>"></script>
+<script src="<?= base_url('assets/js/jquery.min.js'); ?>"></script>
+<script src="<?= base_url('assets/js/popper.min.js'); ?>"></script>
+<script src="<?= base_url('assets/js/bootstrap.min.js'); ?>"></script>
+<script src="<?= base_url('assets/js/wow.min.js'); ?>"></script>
+<script src="<?= base_url('assets/js/gijgo.min.js'); ?>"></script>
+<script src="<?= base_url('assets/js/Chart.min.js'); ?>"></script>
 <script src="<?= base_url('assets/js/main.js'); ?>"></script>
 <script>
     $(document).ready(function() {

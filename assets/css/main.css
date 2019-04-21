@@ -121,13 +121,13 @@ body {
     width: 120px;
 }
 
-.remove_button_css { 
+.remove_button_css {
     margin-top: 5px;
     margin-right: 10px;
     outline: none;
-    padding: 5px; 
-    border: 0px; 
-    box-sizing: none; 
-    background-color: transparent; 
+    padding: 5px;
+    border: 0px;
+    box-sizing: none;
+    background-color: transparent;
     font-weight: 20px;
-  }
+}

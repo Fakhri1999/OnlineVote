@@ -25,5 +25,6 @@ $route['room'] = 'Vote/roomVote';
 $route['roomDetails/([0-9a-zA-Z]{5})'] = 'Vote/detailVote/$1';
 $route['endVote/([0-9a-zA-Z]{5})'] = 'Vote/endVoteNow/$1';
 $route['startVote/([0-9a-zA-Z]{5})'] = 'Vote/startVoteNow/$1';
+$route['detailVoteChart/([0-9a-zA-Z]{5})'] = 'Vote/detailVoteChart/$1';
 $route['submitVote'] = 'Vote/submitVote';
 $route['createVote'] = 'Vote/createVote';

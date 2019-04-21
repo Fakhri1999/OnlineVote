@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/main.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/animate.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/gijgo.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/Chart.min.css'); ?>">
 
     <!-- Font import -->
     <link rel="stylesheet" href="<?= base_url('assets/fonts/gijgo-material.ttf'); ?>">
@@ -39,7 +40,7 @@
                     </li>
                     <?php if ($this->session->userdata('username') != null) : ?>
                         <li class="nav-item">
-                            <a class="nav-link navlinked" href="user">Profile</a>
+                            <a class="nav-link navlinked" href="<?= site_url('user'); ?>">Profile</a>
                         </li>
                         <a class="btn btn-outline-primary tombol pl-5 pr-5" href="logout">Logout</a>
                     <?php else : ?>

@@ -32,6 +32,15 @@ function generateCandidate() {
    return generatedCode;
 }
 
+function generateRandomColor() {
+   var hexList = '0123456789ABCDEF';
+   var color = '#';
+   for (var i = 0; i < 6; i++) {
+      color += hexList[Math.floor(Math.random() * 16)];
+   }
+   return color;
+}
+
 // Button func
 const endVote = (code) => {
    if (confirm(`Are you sure want to end vote for room ${code} ?`)) {
@@ -80,3 +89,53 @@ $('#exampleModal').on('show.bs.modal', function (event) {
       })
    }
 })
+
+// Chart
+const detailRoomCode = $('#detailRoomCode').val()
+var resultData = []
+var resultLabels = []
+var resultColors = []
+
+const dataForChart = (code) => {
+   if (!code) return false
+   $.ajax({
+      url: baseUrl + 'detailVoteChart/' + code,
+      method: 'GET',
+      async: false,
+      success: function (data) {
+         data = JSON.parse(data)
+         for (let i = 0; i < data.length; i++) {
+            resultData.push(data[i].qty)
+            resultLabels.push(data[i].nama_pilihan)
+            resultColors.push(generateRandomColor())
+         }
+      }
+   })
+}
+
+if (detailRoomCode != undefined) {
+   dataForChart(detailRoomCode)
+   const ctx = $('#chartResult');
+   const myPieChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+         datasets: [{
+            data: resultData,
+            backgroundColor: resultColors,
+            label: 'Dataset 1'
+         }],
+         labels: resultLabels
+      },
+      options: {
+         responsive: true,
+         legend: {
+            display: true,
+            position: "bottom",
+            labels: {
+               fontColor: "#333",
+               fontSize: 12
+            }
+         }
+      }
+   });
+}

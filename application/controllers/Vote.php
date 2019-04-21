@@ -93,10 +93,20 @@ class Vote extends CI_Controller
 
     public function detailVote($code)
     {
-        $data['room'] = $this->ModRoom->loadSpecificRoom($code);
+        $data = array(
+            'room' => $this->ModRoom->loadSpecificRoom($code),
+            'chart' => $this->ModRoom->loadChartDataSpecificRoom($code)
+        );
+
         $this->load->view('templates/header');
         $this->load->view('vote/detail', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function detailVoteChart($code)
+    {
+        $chart = $this->ModRoom->loadChartDataSpecificRoom($code);
+        echo json_encode($chart);
     }
 
     public function endVoteNow($code)
@@ -153,9 +163,9 @@ class Vote extends CI_Controller
     public function submitVote()
     {
         $insertData = array(
-          'id_pilihan' => $this->input->post('candidateVote'),
-          'kode_room' => $this->input->post('kode_room'),
-          'id_user' => $this->session->userdata('id_user') 
+            'id_pilihan' => $this->input->post('candidateVote'),
+            'kode_room' => $this->input->post('kode_room'),
+            'id_user' => $this->session->userdata('id_user')
         );
 
         $this->ModRoom->insertVoter($insertData);

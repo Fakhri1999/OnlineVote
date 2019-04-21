@@ -21,6 +21,16 @@ class ModRoom extends CI_Model
       return $this->db->get()->result();
    }
 
+   public function loadChartDataSpecificRoom($code)
+   { 
+      $this->db->select('count(v.id_pilihan) AS qty, p.nama_pilihan');
+      $this->db->from('pilihan p');
+      $this->db->join('voter v', 'p.id_pilihan = v.id_pilihan', 'left');
+      $this->db->where('p.kode_room', $code);
+      $this->db->group_by('p.id_pilihan');
+      return $this->db->get()->result();
+   }
+
    public function checkSpecificRoom($code)
    {
       $query = $this->db->get_where('room', array('kode_room' => $code));
