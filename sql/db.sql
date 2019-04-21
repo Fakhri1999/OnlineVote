@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2019 at 07:45 AM
+-- Generation Time: Apr 21, 2019 at 08:20 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -41,6 +41,8 @@ CREATE TABLE `pilihan` (
 
 INSERT INTO `pilihan` (`id_pilihan`, `kode_room`, `nama_pilihan`, `foto`) VALUES
 ('akGE39sG', 'lBESm', 'Fakhri', ''),
+('aUm7Jc8m', 'RHPOL', 'Jokowi', ''),
+('bSGN9d2C', 'RHPOL', 'Prabowo', ''),
 ('gPsamkkO', 'lBESm', 'Aldi', ''),
 ('s4Jk3f83', 'lBESm', 'Ilham', '');
 
@@ -79,7 +81,8 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`id_room`, `id_user`, `judul`, `deskripsi`, `kode_room`, `waktu_pembuatan`, `waktu_akhir`, `active`) VALUES
-(6, 3, 'Pemilihan Presiden BEM', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'lBESm', '2019-04-22', '2019-04-26', b'1');
+(6, 3, 'Pemilihan Presiden BEM', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'lBESm', '2019-04-22', '2019-04-26', b'0'),
+(7, 3, 'Pemilihan Presiden RI 2019-2024', 'pilihlah presiden dengan bijak, jangan golput', 'RHPOL', '2019-04-22', '2019-04-25', b'0');
 
 -- --------------------------------------------------------
 
@@ -122,8 +125,10 @@ CREATE TABLE `voter` (
 --
 
 INSERT INTO `voter` (`id_voter`, `id_pilihan`, `kode_room`, `id_user`) VALUES
-(1, 'akGE39sG', 'lBESm', 3),
-(3, 'gPsamkkO', 'lBESm', 4);
+(3, 'gPsamkkO', 'lBESm', 4),
+(4, 'gPsamkkO', 'lBESm', 3),
+(5, 'bSGN9d2C', 'RHPOL', 3),
+(6, 'aUm7Jc8m', 'RHPOL', 4);
 
 --
 -- Indexes for dumped tables
@@ -180,7 +185,7 @@ ALTER TABLE `recovery`
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `id_room` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_room` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -192,7 +197,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `voter`
 --
 ALTER TABLE `voter`
-  MODIFY `id_voter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_voter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
