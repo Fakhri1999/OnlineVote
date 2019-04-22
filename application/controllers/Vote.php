@@ -16,7 +16,7 @@ class Vote extends CI_Controller
 
     private function generateCode()
     {
-        $listed = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        $listed = "0123456789ABCDEFGHJKMNOPQRSTUVWXYZabcdefghjkmnopqrstuvwxyz";
         $generatedCode = '';
         for ($i = 0; $i < 5; $i++) {
             $generatedCode .= substr($listed, rand(0, strlen($listed) - 1), 1);
@@ -30,7 +30,7 @@ class Vote extends CI_Controller
         $listed = "0123456789abcdefghijklmnopqrstuvwxyz";
         $generatedImage = '';
         for ($i = 0; $i < 10; $i++) {
-            $generatedCode .= substr($listed, rand(0, strlen($listed) - 1), 1);
+            $generatedImage .= substr($listed, rand(0, strlen($listed) - 1), 1);
         }
 
         return $generatedImage;
@@ -93,6 +93,7 @@ class Vote extends CI_Controller
 
     public function detailVote($code)
     {
+        
         $data = array(
             'room' => $this->ModRoom->loadSpecificRoom($code),
             'chart' => $this->ModRoom->loadChartDataSpecificRoom($code)
