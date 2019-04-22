@@ -41,6 +41,12 @@
             if (this.hash !== "") {
                 event.preventDefault();
                 var hash = this.hash;
+
+                if(hash === "#createVote" || hash === "#room"){
+                    window.location.hash = hash;
+                    return 
+                }
+
                 $('html, body').animate({
                     scrollTop: $(hash).offset().top
                 }, 1200, function() {

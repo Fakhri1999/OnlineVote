@@ -2,7 +2,7 @@
     <div class="container section text-center txt-150">
         <h1 class="display-4 txt-up text-white">Create your vote <span class="font-weight-bold txt-pink">easily</span><br>and <span class="font-weight-bold txt-pink">better</span> with us</h1>
         <p class="lead"></p>
-        <a class="btn btn-lg btn-primary tombol tombol-lg" href="#servis">Get started</a>
+        <a class="btn btn-lg btn-primary tombol tombol-lg" href="#vote">Get started</a>
     </div>
 </div>
 <section class="container section-md wow bounceInUp" id="servis">
