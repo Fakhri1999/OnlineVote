@@ -150,6 +150,10 @@ class Vote extends CI_Controller
             redirect('#vote');
         }
 
+        if ($this->ModRoom->checkRoomEnded($code)) {
+            redirect('');
+        }
+
         if ($this->ModRoom->checkUserVoted($code)) {
             $this->session->set_flashdata('rooms', 'Sorry, You\'ve already voted');
             redirect('#vote');

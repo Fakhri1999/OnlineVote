@@ -22,7 +22,7 @@ class ModRoom extends CI_Model
    }
 
    public function loadChartDataSpecificRoom($code)
-   { 
+   {
       $this->db->select('count(v.id_pilihan) AS qty, p.nama_pilihan');
       $this->db->from('pilihan p');
       $this->db->join('voter v', 'p.id_pilihan = v.id_pilihan', 'left');
@@ -62,6 +62,24 @@ class ModRoom extends CI_Model
 
       $query = $this->db->get_where('voter', $checkData);
       return $query->num_rows() > 0 ? true : false;
+   }
+
+   public function checkRoomEnded($code)
+   {
+      if (!$this->checkRoomActive($code)) {
+         return false;
+      }
+
+      date_default_timezone_set("Asia/Jakarta");
+      $date = new DateTime();
+      $dateFormated = $date->format('Y-m-d');
+
+      $this->db->select('waktu_akhir');
+      $this->db->from('room');
+      $this->db->where('kode_room', $code);
+      $waktu_akhir = $this->db->get()->row();
+
+      return ($dateFormated > $waktu_akhir) ? true : false;
    }
 
    public function startVoteRoom($code)
