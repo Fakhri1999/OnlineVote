@@ -29,11 +29,11 @@
                         <div class="form-row">
                            <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
                               <label>Start at</label>
-                              <input name="dateStart" id="datepicker1" value="<?= date('d/m/Y', strtotime($room[0]->waktu_pembuatan)) ?>" required>
+                              <input name="dateStart" id="datepicker1" value="<?= date('m/d/Y', strtotime($room[0]->waktu_pembuatan)) ?>" required>
                            </div>
                            <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
                               <label>End at</label>
-                              <input name="dateFinish" id="datepicker2" value="<?= date('d/m/Y', strtotime($room[0]->waktu_akhir)) ?>" required>
+                              <input name="dateFinish" id="datepicker2" value="<?= date('m/d/Y', strtotime($room[0]->waktu_akhir)) ?>" required>
                            </div>
                            <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
                               <label>Candidate</label>

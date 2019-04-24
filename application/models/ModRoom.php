@@ -105,6 +105,18 @@ class ModRoom extends CI_Model
    {
       $this->db->insert('voter', $insertData);
    }
+
+   public function getDataFiles($code)
+   {
+      $this->db->select("r.*, COUNT(v.id_pilihan) AS qty, p.nama_pilihan");
+      $this->db->select("(SELECT COUNT(*) FROM voter v2 WHERE v2.kode_room = '$code') AS total");
+      $this->db->from("pilihan p");
+      $this->db->join('room r', 'r.kode_room = p.kode_room');
+      $this->db->join('voter v', 'p.id_pilihan = v.id_pilihan', 'left');
+      $this->db->where('p.kode_room', $code);
+      $this->db->group_by('p.id_pilihan');
+      return $this->db->get()->result();
+   }
 }
 
 /* End of file ModRoom.php */

@@ -93,7 +93,7 @@ class Vote extends CI_Controller
 
     public function detailVote($code)
     {
-        
+
         $data = array(
             'room' => $this->ModRoom->loadSpecificRoom($code),
             'chart' => $this->ModRoom->loadChartDataSpecificRoom($code)
@@ -176,6 +176,114 @@ class Vote extends CI_Controller
         $this->ModRoom->insertVoter($insertData);
         $this->session->set_flashdata('voted', 'Thanks for voting');
         redirect('');
+    }
+
+    public function saveToExcel($code = null)
+    {
+        if ($code == null) {
+            redirect('');
+        }
+
+        $this->load->library('excel');
+        $data = $this->ModRoom->getDataFiles($code);
+
+        // var_dump($data);
+        // return;
+        $fileExcel = "vote-" . $data[0]->judul . ".xlsx";
+        $excel = new Excel();
+
+        // Styling
+        $style_col = array(
+            'font' => array('bold' => true),
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN)
+            )
+        );
+
+        $style_row = array(
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN)
+            )
+        );
+
+        $excel->getActiveSheet()->setTitle($data[0]->judul);
+        $excel->setActiveSheetIndex(0);
+
+        // Set Judul, Kode, Start-end
+        $excel->getActiveSheet()->mergeCells('A1:C1');
+        $excel->getActiveSheet()->SetCellValue('A1', $data[0]->judul)
+            ->getStyle('A1')->getAlignment()
+            ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $excel->getActiveSheet()->SetCellValue('A2', 'Kode : ' . $data[0]->kode_room);
+        $excel->getActiveSheet()->SetCellValue('C2', 'Mulai    : ' . date('d-m-Y', strtotime($data[0]->waktu_pembuatan)));
+        $excel->getActiveSheet()->SetCellValue('C3', 'Selesai : ' . date('d-m-Y', strtotime($data[0]->waktu_akhir)));
+
+        // Set Header
+        $excel->getActiveSheet()->SetCellValue('A5', 'No');
+        $excel->getActiveSheet()->SetCellValue('B5', 'Candidate');
+        $excel->getActiveSheet()->SetCellValue('C5', 'Jumlah');
+
+        // Set Styling Header
+        $excel->getActiveSheet()->getStyle('A5')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('B5')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('C5')->applyFromArray($style_col);
+
+        // Set Width Column
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth('15');
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth('25');
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth('20');
+
+        // Set Height 
+        $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+
+        // Isi
+        $no = 0;
+        $numRows = 6;
+        foreach ($data as $val) {
+            // Table Values
+            $excel->setActiveSheetIndex()->setCellValue('A' . $numRows, ($no + 1));
+            $excel->setActiveSheetIndex()->setCellValue('B' . $numRows, $data[$no]->nama_pilihan);
+            $excel->setActiveSheetIndex()->setCellValue('C' . $numRows, $data[$no]->qty);
+
+            // Styling Table
+            $excel->getActiveSheet()->getStyle('A' . $numRows)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('B' . $numRows)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('C' . $numRows)->applyFromArray($style_row);
+
+            $no++;
+            $numRows++;
+        }
+
+        // Set Total
+        $excel->getActiveSheet()->mergeCells("A{$numRows}:B{$numRows}");
+        $excel->setActiveSheetIndex()->setCellValue('A' . $numRows, 'Total');
+        $excel->setActiveSheetIndex()->setCellValue('C' . $numRows, $data[0]->total);
+
+        $excel->getActiveSheet()->getStyle('A' . $numRows)->applyFromArray($style_row);
+        $excel->getActiveSheet()->getStyle('B' . $numRows)->applyFromArray($style_row);
+        $excel->getActiveSheet()->getStyle('C' . $numRows)->applyFromArray($style_row);
+
+        // Save
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=$fileExcel");
+        header('Cache-Control: max-age=0');
+
+        $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        $write->save('php://output');
     }
 }
 

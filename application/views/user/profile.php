@@ -73,6 +73,7 @@
                                                         </td>
                                                         <td>
                                                             <button class="btn btn-sm btn-outline-primary mb-1 mr-1" onClick="roomDetail('<?= $value->kode_room; ?>')"><i class="fa fa-list"></i> Details</button>
+                                                            <a class="btn btn-sm btn-outline-success mb-1 mr-1" href="<?= site_url("saveToFile/{$value->kode_room}/excel"); ?>" target="_blank"><i class="fa fa-list"></i> Save to File</a>
                                                             <?php if ($value->active) : ?>
                                                                 <button class="btn btn-sm btn-outline-danger mb-1" onClick="endVote('<?= $value->kode_room; ?>')"><i class="fa fa-times"></i> End Vote</button>
                                                             <?php else : ?>
