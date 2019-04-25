@@ -37,14 +37,21 @@
 <script src="<?= base_url('assets/js/main.js'); ?>"></script>
 <script>
     $(document).ready(function() {
+        var url = window.location.pathname.split("/").splice(0, 5);
+
+        if(url[2].length > 0){
+            console.log('Hash successfully loaded')
+            return
+        }
+
         $("a").on('click', function(event) {
             if (this.hash !== "") {
                 event.preventDefault();
                 var hash = this.hash;
 
-                if(hash === "#createVote" || hash === "#room"){
+                if (hash === "#createVote" || hash === "#room") {
                     window.location.hash = hash;
-                    return 
+                    return
                 }
 
                 $('html, body').animate({

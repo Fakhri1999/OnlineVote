@@ -30,13 +30,13 @@
             <div class="collapse navbar-collapse" id="navbarAtas">
                 <ul class="navbar-nav ml-auto text-white">
                     <li class="nav-item">
-                        <a class="nav-link navlinked" href="<?= site_url('Home/#servis'); ?>">Service</a>
+                        <a class="nav-link navlinked" href="<?= site_url('#servis'); ?>">Service</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlinked" href="<?= site_url('Home/#vote'); ?>">Vote</a>
+                        <a class="nav-link navlinked" href="<?= site_url('#vote'); ?>">Vote</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlinked" href="<?= site_url('Home/#about'); ?>">About</a>
+                        <a class="nav-link navlinked" href="<?= site_url('#about'); ?>">About</a>
                     </li>
                     <?php if ($this->session->userdata('username') != null) : ?>
                         <li class="nav-item">
