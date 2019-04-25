@@ -10,11 +10,13 @@ This repo contains in-development code for future releases, but everyone still c
 - Realtime vote result
 
 ## Installation
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_ installation section of the CodeIgniter User Guide.
+Please see the [link](<https://codeigniter.com/user_guide/installation/index.html>) installation section of the CodeIgniter User Guide.
 
 ## Contributing
 Please feel free to submit an issue or pull request. The website is simple
 enough to not require a build process. Just open `localhost/onlinevote/` in a browser
 
+## License
+[MIT](https:///licenses/mit/)
 
 
