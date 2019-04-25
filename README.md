@@ -1,9 +1,7 @@
 # OnVot
 Onvot is an online voting system for peoples who has registered in the system, Onvot make an easy ways to use vote something for everyone
 
-*******************
 ## Release Information
-*******************
 This repo contains in-development code for future releases, but everyone still can use this website
 
 ## Features
