@@ -17,6 +17,6 @@ Please feel free to submit an issue or pull request. The website is simple
 enough to not require a build process. Just open `localhost/onlinevote/` in a browser
 
 ## License
-[MIT](https:///licenses/mit/)
+[MIT](https://github.com/Aldiwildan77/OnlineVote/blob/master/license.rst)
 
 
