@@ -34,6 +34,7 @@
                 </ul>
                 <div class="tab-content" id="profileContent">
                     <div class="bg-white tab-pane fade show active" id="room" role="tabpanel" aria-labelledby="room-tab">
+                        <?= $this->session->flashdata('createvote');?>
                         <div class="container p-3">
                             <div class="row">
                                 <div class="container">
@@ -94,7 +95,7 @@
                             <div class="row">
                                 <div class="container">
                                     <p class="lead">Room Vote Creation</p>
-                                    <form action="createVote" method="post">
+                                    <form action="createVote" method="post" enctype="multipart/form-data" accept-charset="ISO-8859-1">
                                         <div class="form-group">
                                             <label>Title</label>
                                             <input type="text" class="form-control" name="title" placeholder="What food will bring tomorrow ?" required>
@@ -106,11 +107,11 @@
                                         <div class="form-row">
                                             <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <label>Start at</label>
-                                                <input name="dateStart" id="datepicker1" placeholder="mm/dd/YYYY" required>
+                                                <input name="dateStart" id="datepicker1" placeholder="mm/dd/YYYY" autocomplete="off" required>
                                             </div>
                                             <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <label>End at</label>
-                                                <input name="dateFinish" id="datepicker2" placeholder="mm/dd/YYYY" required>
+                                                <input name="dateFinish" id="datepicker2" placeholder="mm/dd/YYYY" autocomplete="off" required>
                                             </div>
                                             <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <label>Candidate</label>

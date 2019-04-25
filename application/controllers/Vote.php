@@ -32,29 +32,37 @@ class Vote extends CI_Controller
         for ($i = 0; $i < 10; $i++) {
             $generatedImage .= substr($listed, rand(0, strlen($listed) - 1), 1);
         }
-
+        // echo $generatedImage;
         return $generatedImage;
     }
 
-    private function uploadImages($filename)
+    private function uploadImages($field_name)
     {
-        // BELUM FIX
-        $config['upload_path']      = './uploads/images/';
-        $config['allowed_types']    = 'png|jpeg|jpg';
-        $config['remove_spaces']    = true;
-        $config['overwrite']        = true;
-        $config['max_sizes']        = '512';
-        // $config['max_width']        = '1080';
-        // $config['max_height']       = '1080';
+        // Image Generate
+        $nameImage = $this->generateNameImage();
+
+        $config = [
+            'upload_path'   => './uploads/images/',
+            'allowed_types' => 'png|jpeg|jpg',
+            'remove_spaces' => true,
+            // 'overwrite'     => true,
+            // 'max_sizes'     => '512',
+            // 'max_width'     => '1080',
+            // 'max_heigth'    => '1080',
+            'file_name'     => $nameImage
+        ];
 
         $this->load->library('upload', $config);
 
-        if (!$this->upload->do_upload($filename)) {
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload($field_name)) {
             $error = array('error' => $this->upload->display_errors());
+            print_r($error);
             return false;
         } else {
             $data = array('upload_data' => $this->upload->data());
-            return true;
+            echo "Sukses";
+            return $this->upload->data('file_name');
         }
     }
 
@@ -80,12 +88,14 @@ class Vote extends CI_Controller
                 'id_pilihan' => $this->input->post("list[{$i}][id_pilihan]"),
                 'kode_room' => $roomCode,
                 'nama_pilihan' => $this->input->post("list[{$i}][nama_pilihan]"),
-                'foto' => $this->input->post("list[{$i}][foto]")
+                'foto' => $this->uploadImages("list" . $i)
             );
 
             array_push($pilihan, $pilihanData);
         }
 
+        // var_dump($pilihan);
+        // return;
         $this->ModRoom->createVoteRoom($insertData, $pilihan);
         $this->session->set_flashdata('createvote', '<div class="alert alert-success" role="alert"> Vote room successfully created </div>');
         redirect('User');
