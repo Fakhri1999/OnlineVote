@@ -117,6 +117,11 @@ class ModRoom extends CI_Model
       $this->db->group_by('p.id_pilihan');
       return $this->db->get()->result();
    }
+
+   public function checkExist($where, $table)
+   {
+      return $this->db->get_where($table, $where)->num_rows() > 0 ? true : false;
+   }
 }
 
 /* End of file ModRoom.php */

@@ -39,7 +39,10 @@ class Vote extends CI_Controller
     private function uploadImages($field_name)
     {
         // Image Generate
-        $nameImage = $this->generateNameImage();
+        do {            
+            $nameImage = $this->generateNameImage();
+            $where = ['foto' => $nameImage];
+        } while ($this->ModRoom->checkExist($where, 'pilihan'));
 
         $config = [
             'upload_path'   => './uploads/images/',
@@ -68,7 +71,11 @@ class Vote extends CI_Controller
 
     public function createVote()
     {
-        $roomCode = $this->generateCode();
+        do {
+            $roomCode = $this->generateCode();
+            $where = ['kode_room' => $roomCode];
+        } while ($this->ModRoom->chechExist($where, 'room'));
+        
         $start = strtotime($this->input->post('dateStart'));
         $finish = strtotime($this->input->post('dateFinish'));
 
