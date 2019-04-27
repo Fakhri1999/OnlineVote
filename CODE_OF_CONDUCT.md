@@ -76,4 +76,4 @@ For answers to common questions about this code of conduct, see
 https://www.contributor-covenant.org/faq
 
 ## More Information
-(mail)[aldiwild77@gmail.com]
+aldiwild77@gmail.com
