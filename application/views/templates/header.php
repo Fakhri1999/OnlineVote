@@ -58,7 +58,7 @@
                 type: 'error',
                 title: "<?= $this->session->flashdata('rooms'); ?>",
                 button: false,
-                timer: 5000,
+                timer: 10000,
             });
         </script>
     <?php elseif ($this->session->flashdata('voted')) : ?>
@@ -68,7 +68,7 @@
                 title: "Thanks for voting",
                 text: "<?= $this->session->flashdata('voted'); ?>",
                 button: false,
-                timer: 5000,
+                timer: 10000,
             });
         </script>
     <?php endif; ?>

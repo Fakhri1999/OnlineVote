@@ -74,7 +74,7 @@ class Vote extends CI_Controller
         do {
             $roomCode = $this->generateCode();
             $where = ['kode_room' => $roomCode];
-        } while ($this->ModRoom->chechExist($where, 'room'));
+        } while ($this->ModRoom->checkExist($where, 'room'));
 
         $start = strtotime($this->input->post('dateStart'));
         $finish = strtotime($this->input->post('dateFinish'));
