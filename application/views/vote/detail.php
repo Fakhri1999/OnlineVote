@@ -4,7 +4,6 @@
          <div class="card mb-3 shadow-sm">
             <div class="card-title mt-3">
                <h3 class="text-center">Detail Vote <?= $room[0]->judul; ?></h3>
-               <input type="hidden" id="detailRoomCode" value="<?= $room[0]->kode_room; ?>">
             </div>
             <div class="card-body">
                <div class="row">
@@ -16,8 +15,8 @@
                </div>
                <div class="row">
                   <div class="col-12">
-                     <!-- <div class="align-content-center"> -->
-                     <form action="" method="post">
+                     <form action="../updateVote" method="post">
+                        <input type="hidden" name="roomCode" id="detailRoomCode" value="<?= $room[0]->kode_room; ?>">
                         <div class="form-group">
                            <label>Title</label>
                            <input type="text" class="form-control" name="title" value="<?= $room[0]->judul; ?>" required>
@@ -48,7 +47,6 @@
                            </div>
                         </div>
                      </form>
-                     <!-- </div> -->
                   </div>
                </div>
             </div>

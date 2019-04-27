@@ -16,7 +16,7 @@
                                 <div class="col-lg-4">
                                     <div class="card mx-1 mb-3 shadow-sm">
                                         <div class="card-body">
-                                            <img src="./uploads/images/<?= $value->foto; ?>" alt="">
+                                            <img src="./uploads/images/<?= $value->foto; ?>" style="" alt="">
                                             <div class="text-center">
                                                 <input type="radio" name="candidateVote" value="<?= $value->id_pilihan; ?>">
                                                 <label>&nbsp; <?= $value->nama_pilihan; ?></label>

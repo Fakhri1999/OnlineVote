@@ -17,11 +17,12 @@ class Login extends CI_Controller
 
     public function index()
     {
+        $utils['title'] = '- Login';
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('templates/login-header');
+            $this->load->view('templates/login-header', $utils);
             $this->load->view('login/login');
         } else {
             // Jika pengisian form berhasil
@@ -52,6 +53,7 @@ class Login extends CI_Controller
 
     public function register()
     {
+        $utils['title'] = '- Register';
         $this->form_validation->set_rules('fullname', 'Fullname', 'trim|required');
         $this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[user.username]',  [
             'is_unique' => 'This username has already taken.'
@@ -61,7 +63,7 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('passwordconf', 'Password Confirmation', 'trim|required|matches[password]');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('templates/login-header');
+            $this->load->view('templates/login-header', $utils);
             $this->load->view('login/register');
             // Jika pengisian form berhasil
         } else {
@@ -88,9 +90,10 @@ class Login extends CI_Controller
 
     public function forgetPassword()
     {
+        $utils['title'] = '- Forget Password';
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         if ($this->form_validation->run() == false) {
-            $this->load->view('templates/login-header');
+            $this->load->view('templates/login-header', $utils);
             $this->load->view('login/forgetPassword');
         } else {
             $data = [
@@ -140,7 +143,7 @@ class Login extends CI_Controller
         $this->email->from('no.reply.tcrb@gmail.com', 'Online Vote');
         $this->email->to($data['email']);
         $this->email->subject('Reset Password');
-        $this->email->message("Click <a href='".base_url('reset/'.$kode)."'>this link</a> to reset your password");
+        $this->email->message("Click <a href='" . base_url('reset/' . $kode) . "'>this link</a> to reset your password");
         return $this->email->send() ? true : false;
     }
 

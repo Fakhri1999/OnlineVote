@@ -66,20 +66,26 @@ class ModRoom extends CI_Model
 
    public function checkRoomEnded($code)
    {
-      if (!$this->checkRoomActive($code)) {
-         return false;
-      }
-
-      date_default_timezone_set("Asia/Jakarta");
       $date = new DateTime();
       $dateFormated = $date->format('Y-m-d');
 
       $this->db->select('waktu_akhir');
       $this->db->from('room');
       $this->db->where('kode_room', $code);
-      $waktu_akhir = $this->db->get()->row();
+      $waktu_akhir = $this->db->get()->row()->waktu_akhir;
 
       return ($dateFormated > $waktu_akhir) ? true : false;
+   }
+
+   public function checkRoomCreator($code)
+   {
+      $checkData = array(
+         'id_user' => $this->session->userdata('id_user'),
+         'kode_room' => $code
+      );
+
+      $query = $this->db->get_where('room', $checkData);
+      return $query->num_rows() > 0 ? true : false;
    }
 
    public function startVoteRoom($code)
@@ -96,7 +102,6 @@ class ModRoom extends CI_Model
 
    public function createVoteRoom($insertData, $pilihan)
    {
-      // insertData is an array
       $this->db->insert('room', $insertData);
       $this->db->insert_batch('pilihan', $pilihan);
    }
@@ -121,6 +126,34 @@ class ModRoom extends CI_Model
    public function checkExist($where, $table)
    {
       return $this->db->get_where($table, $where)->num_rows() > 0 ? true : false;
+   }
+
+   public function deleteVote($code)
+   {
+      $deleteRoom = array('voter', 'pilihan', 'room');
+      $this->db->where('kode_room', $code);
+      $this->db->delete($deleteRoom);
+   }
+
+   public function updateVote($insertData, $code)
+   {
+      $date = new DateTime();
+      $dateFormated = $date->format('Y-m-d');
+
+      if ($dateFormated <= $insertData['waktu_akhir']) {
+         $insertData['active'] = 1;
+      }
+
+      $this->db->where('kode_room', $code);
+      $this->db->update('room', $insertData);
+   }
+
+   public function getVoteDate($code)
+   {
+      $this->db->select('waktu_pembuatan, waktu_akhir');
+      $this->db->from('room');
+      $this->db->where('kode_room', $code);
+      return $this->db->get()->result_array();
    }
 }
 
