@@ -220,7 +220,7 @@ class Vote extends CI_Controller
             $waktuAkhirRaw = $this->ModRoom->getVoteDate($code)[0];
             $waktuAkhir = date('d-m-Y', strtotime("+1 day", strtotime($waktuAkhirRaw['waktu_akhir'])));
 
-            $this->session->set_flashdata('rooms', "Sorry, the vote results will be announced on {$waktuAkhir}");
+            $this->session->set_flashdata('rooms', "Sorry, the vote results will be announced at {$waktuAkhir}");
             redirect('#vote');
         }
 
