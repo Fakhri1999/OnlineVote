@@ -28,7 +28,8 @@ $route['startVote/([0-9a-zA-Z]{5})'] = 'Vote/startVoteNow/$1';
 $route['detailVoteChart/([0-9a-zA-Z]{5})'] = 'Vote/detailVoteChart/$1';
 $route['submitVote'] = 'Vote/submitVote';
 $route['createVote'] = 'Vote/createVote';
-$route['saveToFile/([0-9a-zA-Z]{5})/excel'] = 'Vote/saveToExcel/$1';
+$route['deleteVote'] = 'Vote/deleteVote';
 
+$route['saveToFile/([0-9a-zA-Z]{5})/excel'] = 'Vote/saveToExcel/$1';
 $route['saveToFile/([0-9a-zA-Z]{5})/pdf'] = 'Vote/saveToPDF/$1';
 $route['saveToFile/([0-9a-zA-Z]{5})/docx'] = 'Vote/saveToDocx/$1';
