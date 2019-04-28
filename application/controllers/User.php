@@ -22,13 +22,14 @@ class User extends CI_Controller
 
     public function index()
     {
+        $utils['title'] = '- Profile';
         $data = array(
             'sql' => $this->ModRoom->loadRoom(),
             'room' => $this->ModUser->getCountRoomCreated(),
             'voted' => $this->ModUser->getCountRoomVoted()
         );
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $utils);
         $this->load->view('user/profile', $data);
         $this->load->view('templates/footer');
     }

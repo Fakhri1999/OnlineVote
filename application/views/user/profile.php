@@ -34,7 +34,6 @@
                 </ul>
                 <div class="tab-content" id="profileContent">
                     <div class="bg-white tab-pane fade show active" id="room" role="tabpanel" aria-labelledby="room-tab">
-                        <?= $this->session->flashdata('createvote');?>
                         <div class="container p-3">
                             <div class="row">
                                 <div class="container">
@@ -56,6 +55,8 @@
                                             <tbody class="text-center">
                                                 <?php
                                                 $no = 0;
+                                                $date = new DateTime();
+                                                $dateFormated = $date->format('Y-m-d');
                                                 foreach ($sql as $value) :
                                                     $no++;
                                                     ?>
@@ -66,7 +67,9 @@
                                                         <td><?= $value->waktu_pembuatan; ?></td>
                                                         <td><?= $value->waktu_akhir; ?></td>
                                                         <td>
-                                                            <?php if ($value->active) : ?>
+                                                            <?php if ($dateFormated > $value->waktu_akhir) : ?>
+                                                                <button disabled="disabled" class="btn btn-sm btn-secondary">Inactive</button>
+                                                            <?php elseif ($value->active) : ?>
                                                                 <button disabled="disabled" class="btn btn-sm btn-success">Active</button>
                                                             <?php else : ?>
                                                                 <button disabled="disabled" class="btn btn-sm btn-secondary">Inactive</button>
@@ -75,11 +78,14 @@
                                                         <td>
                                                             <button class="btn btn-sm btn-outline-primary mb-1 mr-1" onClick="roomDetail('<?= $value->kode_room; ?>')"><i class="fa fa-list"></i> Details</button>
                                                             <a class="btn btn-sm btn-outline-success mb-1 mr-1" href="<?= site_url("saveToFile/{$value->kode_room}/excel"); ?>" target="_blank"><i class="fa fa-list"></i> Save to File</a>
-                                                            <?php if ($value->active) : ?>
-                                                                <button class="btn btn-sm btn-outline-danger mb-1" onClick="endVote('<?= $value->kode_room; ?>')"><i class="fa fa-times"></i> End Vote</button>
+                                                            <?php if ($dateFormated > $value->waktu_akhir) : ?>
+                                                                <!-- <button class="btn btn-sm btn-outline-secondary mb-1" onClick="return false" disabled><i class="fa fa-times"></i> Ended</button> -->
+                                                            <?php elseif ($value->active) : ?>
+                                                                <button class="btn btn-sm btn-outline-warning mb-1" onClick="endVote('<?= $value->kode_room; ?>')"><i class="fa fa-times"></i> End Vote</button>
                                                             <?php else : ?>
                                                                 <button class="btn btn-sm btn-outline-primary mb-1" onClick="startVote('<?= $value->kode_room; ?>')"><i class="fa fa-check"></i> Start Vote</button>
                                                             <?php endif; ?>
+                                                            <button class="btn btn-sm btn-outline-danger mb-1" onClick="deleteVote('<?= $value->kode_room; ?>')"><i class="fa fa-times"></i> Delete</button>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>

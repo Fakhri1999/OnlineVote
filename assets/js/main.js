@@ -56,6 +56,12 @@ const startVote = (code) => {
 
 const roomDetail = (code) => window.location.replace(`roomDetails/${code}`)
 
+const deleteVote = (code) => {
+   if (confirm(`Are you sure want to delete vote for room ${code} ?`)) {
+      window.location.replace(`deleteVote/${code}`)
+   }
+}
+
 $('#exampleModal').on('show.bs.modal', function (event) {
    // $('#myInput').trigger('focus')
    let btn = $(event.relatedTarget)

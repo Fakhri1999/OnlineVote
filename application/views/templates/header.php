@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>OnVot</title>
+    <title>OnVot <?= $title; ?></title>
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/vendors/font-awesome-4.7.0/css/font-awesome.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/main.css'); ?>">
@@ -58,16 +58,17 @@
                 type: 'error',
                 title: "<?= $this->session->flashdata('rooms'); ?>",
                 button: false,
-                timer: 5000,
+                timer: 10000,
             });
         </script>
     <?php elseif ($this->session->flashdata('voted')) : ?>
         <script>
             swal.fire({
                 type: 'success',
-                title: "<?= $this->session->flashdata('voted'); ?>",
+                title: "Thanks for voting",
+                text: "<?= $this->session->flashdata('voted'); ?>",
                 button: false,
-                timer: 5000,
+                timer: 10000,
             });
         </script>
     <?php endif; ?>

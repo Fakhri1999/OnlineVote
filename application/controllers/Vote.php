@@ -39,7 +39,10 @@ class Vote extends CI_Controller
     private function uploadImages($field_name)
     {
         // Image Generate
-        $nameImage = $this->generateNameImage();
+        do {
+            $nameImage = $this->generateNameImage();
+            $where = ['foto' => $nameImage];
+        } while ($this->ModRoom->checkExist($where, 'pilihan'));
 
         $config = [
             'upload_path'   => './uploads/images/',
@@ -68,7 +71,11 @@ class Vote extends CI_Controller
 
     public function createVote()
     {
-        $roomCode = $this->generateCode();
+        do {
+            $roomCode = $this->generateCode();
+            $where = ['kode_room' => $roomCode];
+        } while ($this->ModRoom->checkExist($where, 'room'));
+
         $start = strtotime($this->input->post('dateStart'));
         $finish = strtotime($this->input->post('dateFinish'));
 
@@ -94,23 +101,34 @@ class Vote extends CI_Controller
             array_push($pilihan, $pilihanData);
         }
 
-        // var_dump($pilihan);
-        // return;
         $this->ModRoom->createVoteRoom($insertData, $pilihan);
-        $this->session->set_flashdata('createvote', '<div class="alert alert-success" role="alert"> Vote room successfully created </div>');
+        $this->session->set_flashdata('voteNow', '<div class="alert alert-success" role="alert"> Vote room successfully created </div>');
         redirect('User');
     }
 
     public function detailVote($code)
     {
-
+        $utils['title'] = '- Vote Details';
         $data = array(
             'room' => $this->ModRoom->loadSpecificRoom($code),
             'chart' => $this->ModRoom->loadChartDataSpecificRoom($code)
         );
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $utils);
         $this->load->view('vote/detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function resultVote($code)
+    {
+        $utils['title'] = '- Vote Results';
+        $data = array(
+            'room' => $this->ModRoom->loadSpecificRoom($code),
+            'chart' => $this->ModRoom->loadChartDataSpecificRoom($code)
+        );
+
+        $this->load->view('templates/header', $utils);
+        $this->load->view('vote/room', $data);
         $this->load->view('templates/footer');
     }
 
@@ -134,8 +152,46 @@ class Vote extends CI_Controller
         redirect('User');
     }
 
+    public function deleteVote()
+    {
+        $code = $this->uri->segment(2);
+
+        if (!$this->ModRoom->checkRoomCreator($code)) {
+            show_404();
+        }
+
+        $this->ModRoom->deleteVote($code);
+        $this->session->set_flashdata('voteNow', '<div class="alert alert-danger" role="alert"> Vote room was successfully deleted </div>');
+        redirect('User');
+    }
+
+    public function updateVote()
+    {
+        $code = $this->input->post('roomCode');
+
+        if (!$this->ModRoom->checkRoomCreator($code)) {
+            show_404();
+        }
+
+        $start = strtotime($this->input->post('dateStart'));
+        $finish = strtotime($this->input->post('dateFinish'));
+
+        $insertData = array(
+            'judul' => $this->input->post('title'),
+            'deskripsi' => $this->input->post('description'),
+            'waktu_pembuatan' => date('Y-m-d', $start),
+            'waktu_akhir' => date('Y-m-d', $finish),
+            'active' => 0
+        );
+
+        $this->ModRoom->updateVote($insertData, $code);
+        $this->session->set_flashdata('voteNow', '<div class="alert alert-success" role="alert"> Vote room successfully updated </div>');
+        redirect('User');
+    }
+
     public function roomVote()
     {
+        $utils['title'] = '- Voting Room';
         $code = str_replace("_", "", $this->input->post('codeVote'));
         $re = '/^[\w|\d]{5}/';
 
@@ -155,22 +211,21 @@ class Vote extends CI_Controller
             redirect('#vote');
         }
 
-        if (!$this->ModRoom->checkRoomActive($code)) {
-            $this->session->set_flashdata('rooms', 'Sorry, the vote room has been closed');
-            redirect('#vote');
-        }
-
-        if ($this->ModRoom->checkRoomEnded($code)) {
-            redirect('');
+        if (!$this->ModRoom->checkRoomActive($code) || $this->ModRoom->checkRoomEnded($code)) {
+            $this->resultVote($code);
+            return;
         }
 
         if ($this->ModRoom->checkUserVoted($code)) {
-            $this->session->set_flashdata('rooms', 'Sorry, You\'ve already voted');
+            $waktuAkhirRaw = $this->ModRoom->getVoteDate($code)[0];
+            $waktuAkhir = date('d-m-Y', strtotime("+1 day", strtotime($waktuAkhirRaw['waktu_akhir'])));
+
+            $this->session->set_flashdata('rooms', "Sorry, the vote results will be announced at {$waktuAkhir}");
             redirect('#vote');
         }
 
         $data['sql'] = $this->ModRoom->loadSpecificRoom($code);
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $utils);
         $this->load->view('vote/vote', $data);
         $this->load->view('templates/footer');
     }
@@ -184,7 +239,7 @@ class Vote extends CI_Controller
         );
 
         $this->ModRoom->insertVoter($insertData);
-        $this->session->set_flashdata('voted', 'Thanks for voting');
+        $this->session->set_flashdata('voted', 'Enter the room code when vote already ended to check the results');
         redirect('');
     }
 
@@ -197,8 +252,6 @@ class Vote extends CI_Controller
         $this->load->library('excel');
         $data = $this->ModRoom->getDataFiles($code);
 
-        // var_dump($data);
-        // return;
         $fileExcel = "vote-" . $data[0]->judul . ".xlsx";
         $excel = new Excel();
 
