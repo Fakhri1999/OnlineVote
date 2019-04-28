@@ -35,4 +35,3 @@ $route['updateVote'] = 'Vote/updateVote';
 // Save to file
 $route['saveToFile/([0-9a-zA-Z]{5})/excel'] = 'Vote/saveToExcel/$1';
 $route['saveToFile/([0-9a-zA-Z]{5})/pdf'] = 'Vote/saveToPDF/$1';
-$route['saveToFile/([0-9a-zA-Z]{5})/docx'] = 'Vote/saveToDocx/$1';

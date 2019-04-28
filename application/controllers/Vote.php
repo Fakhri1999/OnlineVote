@@ -360,6 +360,19 @@ class Vote extends CI_Controller
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');
     }
+
+    public function saveToPDF($code)
+    { 
+        if (!$this->ModRoom->checkRoomCreator($code)) {
+            show_error('You don\'t have access to the url you where trying to reach', 403, '403 - Forbidden: Access is denied.');
+        }
+
+        $this->load->library('filePDF');
+        $data = $this->ModRoom->getDataFiles($code);
+        $pdf = new filePDF();
+
+        // KERJAKAN PDF NYA DISINI
+    }
 }
 
 /* End of file Vote.php */
