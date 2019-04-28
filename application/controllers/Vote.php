@@ -108,6 +108,10 @@ class Vote extends CI_Controller
 
     public function detailVote($code)
     {
+        if (!$this->ModRoom->checkRoomCreator($code)) {
+            show_error('You don\'t have access to the url you where trying to reach', 403, '403 - Forbidden: Access is denied.');
+        }
+
         $utils['title'] = '- Vote Details';
         $data = array(
             'room' => $this->ModRoom->loadSpecificRoom($code),
@@ -140,6 +144,10 @@ class Vote extends CI_Controller
 
     public function endVoteNow($code)
     {
+        if (!$this->ModRoom->checkRoomCreator($code)) {
+            show_error('You don\'t have access to the url you where trying to reach', 403, '403 - Forbidden: Access is denied.');
+        }
+
         $this->ModRoom->endVoteRoom($code);
         $this->session->set_flashdata('voteNow', '<div class="alert alert-success" role="alert"> Vote room is closed </div>');
         redirect('User');
@@ -147,6 +155,10 @@ class Vote extends CI_Controller
 
     public function startVoteNow($code)
     {
+        if (!$this->ModRoom->checkRoomCreator($code)) {
+            show_error('You don\'t have access to the url you where trying to reach', 403, '403 - Forbidden: Access is denied.');
+        }
+
         $this->ModRoom->startVoteRoom($code);
         $this->session->set_flashdata('voteNow', '<div class="alert alert-success" role="alert"> Vote room is started </div>');
         redirect('User');
@@ -243,10 +255,10 @@ class Vote extends CI_Controller
         redirect('');
     }
 
-    public function saveToExcel($code = null)
+    public function saveToExcel($code)
     {
-        if ($code == null) {
-            redirect('');
+        if (!$this->ModRoom->checkRoomCreator($code)) {
+            show_error('You don\'t have access to the url you where trying to reach', 403, '403 - Forbidden: Access is denied.');
         }
 
         $this->load->library('excel');
