@@ -71,6 +71,16 @@ class Vote extends CI_Controller
 
     public function createVote()
     {
+        // Mengecek judulnya
+        // LANJUTKAN DISINI
+        if(preg_match("%/^[\w|\d|\s]/%", $this->input->post('title'))){
+            echo "Berhasil";
+        } else {
+            echo "Gagal";
+        }
+        return;
+        // END LANJUTKAN
+        
         do {
             $roomCode = $this->generateCode();
             $where = ['kode_room' => $roomCode];
