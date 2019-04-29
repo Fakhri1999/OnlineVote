@@ -128,8 +128,8 @@ class Login extends CI_Controller
         $config = [
             'protocol'  => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'no.reply.tcrb@gmail.com',
-            'smtp_pass' => 'apayaenaknya123',
+            'smtp_user' => 'noreply.onlinevote@gmail.com',
+            'smtp_pass' => 'sembarangwes12345@',
             'smtp_port' => 465,
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
@@ -140,7 +140,7 @@ class Login extends CI_Controller
         // echo $data['email'];
         // return;
         $this->load->library('email', $config);
-        $this->email->from('no.reply.tcrb@gmail.com', 'Online Vote');
+        $this->email->from('noreply.onlinevote@gmail.com', 'Online Vote');
         $this->email->to($data['email']);
         $this->email->subject('Reset Password');
         $this->email->message("Click <a href='" . base_url('reset/' . $kode) . "'>this link</a> to reset your password");
@@ -157,9 +157,10 @@ class Login extends CI_Controller
                 $this->form_validation->set_rules('passwordConf', 'Password confirmation', 'trim|required|matches[password]');
                 if ($this->form_validation->run() == false) {
                     $data = [
-                        'kode' => $kode
+                        'kode' => $kode,
+                        'title' => '- Reset Password'
                     ];
-                    $this->load->view('templates/login-header');
+                    $this->load->view('templates/login-header', $data);
                     $this->load->view('login/resetPassword', $data);
                 } else {
                     $data = [
