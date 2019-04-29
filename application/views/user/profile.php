@@ -165,20 +165,20 @@
                 <div class="modal-body">
                     <form action="" method="post" id="formModal">
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" id="rowOne"></label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2 col-form-label labelModals" id="rowOne"></label>
+                            <div class="col-sm-10 inputModals">
                                 <input type="text" class="form-control" id="inputOne" name="inputOne" value="" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" id="rowTwo"></label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2 col-form-label labelModals" id="rowTwo"></label>
+                            <div class="col-sm-10 inputModals">
                                 <input type="text" class="form-control" id="inputTwo" name="inputTwo" value="" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" id="rowThree"></label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2 col-form-label labelModals" id="rowThree"></label>
+                            <div class="col-sm-10 inputModals">
                                 <input type="email" class="form-control" id="inputThree" name="inputThree" value="" required>
                             </div>
                         </div>

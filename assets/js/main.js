@@ -97,6 +97,8 @@ $('#exampleModal').on('show.bs.modal', function (event) {
    console.log(cond)
 
    if (cond == 'paswd') {
+      $('.labelModals').addClass('col-sm-4').removeClass('col-sm-2')
+      $('.inputModals').addClass('col-sm-8').removeClass('col-sm-10')
       $('#formModal').attr('action', 'editPassword')
       $('#rowOne').html('Old Password')
       $('#inputOne').val('').attr('type', 'password')
@@ -105,6 +107,8 @@ $('#exampleModal').on('show.bs.modal', function (event) {
       $('#rowThree').html('Confirm Password')
       $('#inputThree').val('').attr('type', 'password')
    } else {
+      $('.labelModals').addClass('col-sm-2').removeClass('col-sm-4')
+      $('.inputModals').addClass('col-sm-10').removeClass('col-sm-8')
       $('#formModal').attr('action', 'editProfile')
       $('#rowOne').html('Name')
       $('#rowTwo').html('Username')

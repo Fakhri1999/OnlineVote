@@ -166,10 +166,6 @@ class Vote extends CI_Controller
 
     public function deleteVote($code)
     {
-        // $code = $this->uri->segment(2);
-
-        // echo $code;
-        // return;
         if (!$this->ModRoom->checkRoomCreator($code)) {
             show_404();
         }
