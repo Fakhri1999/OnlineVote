@@ -10,7 +10,11 @@
                   <div class="col-12">
                      <div class="align-content-center">
                         <input type="hidden" name="roomCode" id="detailRoomCode" value="<?= $room[0]->kode_room; ?>">
-                        <canvas id="chartResult"></canvas>
+                        <?php if ($chart[0]->total == 0) : ?>
+                           <h3 class="display-1">No one voted</h3>
+                        <?php else : ?>
+                           <canvas id="chartResult"></canvas>
+                        <?php endif; ?>
                      </div>
                   </div>
                </div>

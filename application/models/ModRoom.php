@@ -24,6 +24,7 @@ class ModRoom extends CI_Model
    public function loadChartDataSpecificRoom($code)
    {
       $this->db->select('count(v.id_pilihan) AS qty, p.nama_pilihan');
+      $this->db->select("(SELECT COUNT(*) FROM voter v2 WHERE v2.kode_room = '$code') AS total");
       $this->db->from('pilihan p');
       $this->db->join('voter v', 'p.id_pilihan = v.id_pilihan', 'left');
       $this->db->where('p.kode_room', $code);

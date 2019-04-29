@@ -9,7 +9,11 @@
                <div class="row">
                   <div class="col-12">
                      <div class="align-content-center">
-                        <canvas id="chartResult"></canvas>
+                        <?php if ($chart[0]->total == 0) : ?>
+                           <h5 class="display-4 text-center text-danger p-2 mb-5">No one voted</h5>
+                        <?php else : ?>
+                           <canvas id="chartResult"></canvas>
+                        <?php endif; ?>
                      </div>
                   </div>
                </div>
