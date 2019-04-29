@@ -76,8 +76,8 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <button class="btn btn-sm btn-outline-primary mb-1 mr-1" onClick="roomDetail('<?= $value->kode_room; ?>')"><i class="fa fa-list"></i> Details</button>
-                                                            <a class="btn btn-sm btn-outline-success mb-1 mr-1" href="<?= site_url("saveToFile/{$value->kode_room}/excel"); ?>" target="_blank"><i class="fa fa-list"></i> Save to File</a>
+                                                            <button class="btn btn-sm btn-outline-primary mb-1" onClick="roomDetail('<?= $value->kode_room; ?>')"><i class="fa fa-list"></i> Details</button>
+                                                            <button type="button" class="btn btn-sm btn-outline-success mb-1" onClick="saveToFile('<?= $value->kode_room; ?>')"><i class="fa fa-sticky-note"></i> Save to File</button>
                                                             <?php if ($dateFormated > $value->waktu_akhir) : ?>
                                                                 <!-- <button class="btn btn-sm btn-outline-secondary mb-1" onClick="return false" disabled><i class="fa fa-times"></i> Ended</button> -->
                                                             <?php elseif ($value->active) : ?>

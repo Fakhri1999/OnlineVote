@@ -62,6 +62,32 @@ const deleteVote = (code) => {
    }
 }
 
+const saveToFile = (code) => {
+   Swal.fire({
+      'title': "Choose files",
+      'html': `<button type="button" class="btn btn-md btn-outline-success mb-1 m-1" id="excel"><i class="fa fa-sticky-note"></i> Excel</button>` +
+         `<button type="button" class="btn btn-md btn-outline-danger m-1" id="pdf"><i class="fa fa-sticky-note"></i> PDF</button>`,
+      showCancelButton: false,
+      showConfirmButton: false,
+      onBeforeOpen: () => {
+         const content = Swal.getContent()
+         const $ = content.querySelector.bind(content)
+
+         const excel = $('#excel')
+         const pdf = $('#pdf')
+
+         excel.addEventListener('click', function () {
+            window.open(baseUrl + `saveToFile/${code}/excel`)
+         })
+
+         pdf.addEventListener('click', function () {
+            window.open(baseUrl + `saveToFile/${code}/pdf`)
+         })
+      },
+      onOpen: () => document.activeElement.blur()
+   })
+}
+
 $('#exampleModal').on('show.bs.modal', function (event) {
    // $('#myInput').trigger('focus')
    let btn = $(event.relatedTarget)
