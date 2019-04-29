@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2019 at 08:20 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Apr 29, 2019 at 08:12 AM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -105,7 +105,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `username`, `nama`, `password`, `email`) VALUES
 (2, 'fakhri', 'Muhammad Fakhri Imaduddin', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'fakhriimaduddin19@gmail.com'),
 (3, 'aldiwildan', 'Muhammad Wildan Aldiansyah', '8e756c9f2b15da6a63f84852fc39667617523133', 'aldiwild77@gmail.com'),
-(4, 'hamandil', 'Ilham Andriansah', '8e756c9f2b15da6a63f84852fc39667617523133', 'ilhamandri@gmail.com');
+(4, 'hamandil', 'Ilham Andriansah', '8e756c9f2b15da6a63f84852fc39667617523133', 'ilhamandri@gmail.com'),
+(5, 'alifandarta', 'Alif Andarta Al Falah', '8e756c9f2b15da6a63f84852fc39667617523133', 'alifandarta@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -128,7 +129,9 @@ INSERT INTO `voter` (`id_voter`, `id_pilihan`, `kode_room`, `id_user`) VALUES
 (3, 'gPsamkkO', 'lBESm', 4),
 (4, 'gPsamkkO', 'lBESm', 3),
 (5, 'bSGN9d2C', 'RHPOL', 3),
-(6, 'aUm7Jc8m', 'RHPOL', 4);
+(6, 'aUm7Jc8m', 'RHPOL', 4),
+(7, 'gPsamkkO', 'lBESm', 3),
+(8, 'bSGN9d2C', 'RHPOL', 5);
 
 --
 -- Indexes for dumped tables
@@ -179,7 +182,7 @@ ALTER TABLE `voter`
 -- AUTO_INCREMENT for table `recovery`
 --
 ALTER TABLE `recovery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `room`
@@ -191,13 +194,13 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `voter`
 --
 ALTER TABLE `voter`
-  MODIFY `id_voter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_voter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -228,6 +231,15 @@ ALTER TABLE `voter`
   ADD CONSTRAINT `voter_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
   ADD CONSTRAINT `voter_ibfk_2` FOREIGN KEY (`kode_room`) REFERENCES `room` (`kode_room`),
   ADD CONSTRAINT `voter_ibfk_3` FOREIGN KEY (`id_pilihan`) REFERENCES `pilihan` (`id_pilihan`);
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `activeExp` ON SCHEDULE EVERY 1 MINUTE STARTS '2019-04-28 10:35:29' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE room SET active = 0
+    WHERE CURDATE() > waktu_akhir$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

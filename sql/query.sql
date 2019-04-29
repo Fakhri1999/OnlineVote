@@ -25,3 +25,5 @@ ON SCHEDULE EVERY 1 MINUTE
 DO
 UPDATE room SET active = 0
    WHERE CURDATE() > waktu_akhir
+
+SET GLOBAL event_scheduler="ON"
