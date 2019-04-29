@@ -164,10 +164,12 @@ class Vote extends CI_Controller
         redirect('User');
     }
 
-    public function deleteVote()
+    public function deleteVote($code)
     {
-        $code = $this->uri->segment(2);
+        // $code = $this->uri->segment(2);
 
+        // echo $code;
+        // return;
         if (!$this->ModRoom->checkRoomCreator($code)) {
             show_404();
         }
@@ -369,9 +371,51 @@ class Vote extends CI_Controller
 
         $this->load->library('filePDF');
         $data = $this->ModRoom->getDataFiles($code);
-        $pdf = new filePDF();
 
-        // KERJAKAN PDF NYA DISINI
+        $pdf = new filePDF('P', 'mm', 'A4');
+        $pdf->AddPage();
+
+        // Judul
+        $pdf->setFont('Arial', 'B', 12);
+        $pdf->Cell('83');
+        $pdf->Cell(24, 5, $data[0]->judul, 0, 0, 'C');
+        $pdf->Ln(7);
+
+        // Dibawah judul
+        $pdf->setFont('Arial', '', 11);
+        $pdf->Cell(10);
+        $pdf->Cell(20, 3, 'Kode : '.$data[0]->kode_room, 0, 0, '');
+        $pdf->Cell(115);
+        $pdf->Cell(35, 5, 'Mulai    : '.date('d-m-Y', strtotime($data[0]->waktu_pembuatan)), 0, 1, '');
+        $pdf->Cell(145);
+        $pdf->Cell(35, 5, 'Selesai : '.date('d-m-Y', strtotime($data[0]->waktu_akhir)), 0, 1, '');
+        $pdf->Ln(8);
+        
+        // Tabel
+        $pdf->Cell(10);
+        // Header tabel
+        $pdf->setFont('Arial', 'B', 11);
+        $pdf->Cell(56, 7, 'No', 1, 0, 'C');
+        $pdf->Cell(58, 7, 'Candidate', 1, 0, 'C');
+        $pdf->Cell(57, 7, 'Jumlah', 1, 1, 'C');
+        // Isi tabel
+        $pdf->setFont('Arial', '', 11);
+        for ($i=0; $i < sizeof($data); $i++) { 
+            $pdf->Cell(10);
+            $pdf->Cell(56, 7, $i+1, 1, 0, 'C');
+            $pdf->Cell(58, 7, $data[$i]->nama_pilihan, 1, 0, 'C');
+            $pdf->Cell(57, 7, $data[$i]->qty, 1, 1, 'C');
+        }
+        $pdf->Cell(10);
+        $pdf->Cell(114, 7, 'Total', 1, 0, 'C');
+        $pdf->Cell(57, 7, $data[0]->total, 1, 1, 'C');
+
+        $pdf->output('I', 'vote-' . $data[0]->judul . '.pdf');
+    }
+
+    public function tes($code)
+    {
+        echo json_encode($this->ModRoom->getDataFiles($code));
     }
 }
 
