@@ -46,6 +46,7 @@
                         <div class="form-group">
                            <div class="form-row mt-3">
                               <div class="col-md-12 text-right">
+                                 <button class="btn btn-md btn-secondary" onClick="location.href='../user">Close</button>
                                  <button class="btn btn-md btn-warning" type="submit">Update</button>
                               </div>
                            </div>
