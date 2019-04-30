@@ -19,6 +19,7 @@
                     </div>
                     <small class="form-text text-danger"><?= form_error('password'); ?></small>
                     <button class="btn btn-primary col col-lg-12 p-1 mb-2 mt-1" type="submit">Login</button>
+                    <a class="btn btn-primary col col-lg-12 p-1 mb-2 mt-1" href="<?=base_url() ?>">Home</a>                
                     <div class="row">
                         <small class="col col-lg-6">Dont have account? <a href="register">Register here</a></small><br>
                         <small class="col col-lg-6">Forget your password? <a href="forget">Click here</a></small>
