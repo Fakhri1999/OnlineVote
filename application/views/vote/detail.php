@@ -40,13 +40,13 @@
                            </div>
                            <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
                               <label>Candidate</label>
-                              <input type="number" class="form-control" min="2" max="25" placeholder="2" readonly required>
+                              <input type="number" class="form-control" min="2" max="25" placeholder="<?= sizeof($room)?>" readonly required>
                            </div>
                         </div>
                         <div class="form-group">
                            <div class="form-row mt-3">
                               <div class="col-md-12 text-right">
-                                 <button class="btn btn-md btn-secondary" onClick="location.href='../user">Close</button>
+                                 <button class="btn btn-md btn-secondary" type="button" onClick="location.href='<?= site_url("user");?>'">Close</button>
                                  <button class="btn btn-md btn-warning" type="submit">Update</button>
                               </div>
                            </div>

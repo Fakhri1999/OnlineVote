@@ -126,7 +126,8 @@ class Vote extends CI_Controller
             'room' => $this->ModRoom->loadSpecificRoom($code),
             'chart' => $this->ModRoom->loadChartDataSpecificRoom($code)
         );
-
+        // echo json_encode($data);
+        // return;
         $this->load->view('templates/header', $utils);
         $this->load->view('vote/detail', $data);
         $this->load->view('templates/footer');
@@ -239,7 +240,7 @@ class Vote extends CI_Controller
             $waktuAkhirRaw = $this->ModRoom->getVoteDate($code)[0];
             $waktuAkhir = date('d-m-Y', strtotime("+1 day", strtotime($waktuAkhirRaw['waktu_akhir'])));
 
-            $this->session->set_flashdata('rooms', "Sorry, the vote results will be announced at {$waktuAkhir}");
+            $this->session->set_flashdata('rooms', "Sorry you already voted, the vote results will be announced at {$waktuAkhir}");
             redirect('#vote');
         }
 
