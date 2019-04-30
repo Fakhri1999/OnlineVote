@@ -71,15 +71,14 @@ class Vote extends CI_Controller
 
     public function createVote()
     {
-        // Mengecek judulnya
-        // LANJUTKAN DISINI
-        if(preg_match("%/^[\w|\d|\s]/%", $this->input->post('title'))){
-            echo "Berhasil";
-        } else {
-            echo "Gagal";
+        $titles = $this->input->post('title');
+        $re = '/[\/:*?"<>|]/';
+        preg_match_all($re, $titles, $results, PREG_SET_ORDER, 0);
+
+        if($results){
+            $this->session->set_flashdata('voteNow', '<div class="alert alert-danger" role="alert">Vote room creation error cause your title contain characters \ / : * ? " < > | </div>');
+            redirect('User');
         }
-        return;
-        // END LANJUTKAN
         
         do {
             $roomCode = $this->generateCode();

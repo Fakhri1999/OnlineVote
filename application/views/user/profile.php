@@ -105,7 +105,7 @@
                                         <div class="form-group">
                                             <label>Title</label>
                                             <input type="text" class="form-control" name="title" placeholder="What food will bring tomorrow ?" required>
-                                            <small class="form-text text-muted">The title must not contain any of the following characters \/:*?"<>|</small>
+                                            <small class="form-text text-muted">The title must not contain any of the following characters \ / : * ? " < > | </small>
                                         </div>
                                         <div class="form-group">
                                             <label>Description</label>
