@@ -168,7 +168,7 @@ class Login extends CI_Controller
                     ];
 
                     $this->ModLogin->resetPassword($result['id_user'], $data);
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                     Your password has been updated! You can login with your new password.
                     </div>');
                     redirect('login');
