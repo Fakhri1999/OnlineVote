@@ -127,13 +127,14 @@ class Login extends CI_Controller
     {
         $config = [
             'protocol'  => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_host' => 'smtp.gmail.com',
             'smtp_user' => 'noreply.onlinevote@gmail.com',
             'smtp_pass' => 'sembarangwes12345@',
             'smtp_port' => 465,
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
-            'newline'   => "\r\n"
+            'newline'   => "\r\n",
+            'smtp_crypto' => 'TLS'
         ];
         $kode = md5('voting' . $data['password']);
         $this->ModLogin->setExp($data['id_user'], $kode);

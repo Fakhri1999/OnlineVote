@@ -6,10 +6,14 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'onvot',
+   // 'hostname' => ENVIRONMENT === 'production' ? getenv('DB_HOST') : 'localhost',
+	// 'username' => ENVIRONMENT === 'production' ? getenv('DB_USER') : 'root',
+	// 'password' => ENVIRONMENT === 'production' ? getenv('DB_PASSWORD') : '',
+	// 'database' => ENVIRONMENT === 'production' ? getenv('DB_NAME') : 'onvot',
+	'hostname' => getenv('DB_HOST'),
+	'username' => getenv('DB_USER'),
+	'password' => getenv('DB_PASSWORD'),
+	'database' => getenv('DB_NAME'),
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
