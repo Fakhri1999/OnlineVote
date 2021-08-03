@@ -1,0 +1,13 @@
+{
+  "name": "fakhri/onvot",
+  "authors": [
+    {
+      "name": "Fakhri1999",
+      "email": "fakhriimaduddin19@gmail.com"
+    }
+  ],
+  "require": {},
+  "scripts": {
+    "post-install-cmd": "cd application; composer install; composer update"
+  }
+}
