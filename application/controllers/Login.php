@@ -112,7 +112,6 @@ class Login extends CI_Controller
                     Send recovery email failed. Please contact our support at <b>admin@onlinevote.com</b>
                     </div>');
                 }
-                // return;
                 redirect('login');
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
@@ -127,21 +126,19 @@ class Login extends CI_Controller
     {
         $config = [
             'protocol'  => 'smtp',
-            'smtp_host' => 'smtp.gmail.com',
-            'smtp_user' => 'noreply.onlinevote@gmail.com',
-            'smtp_pass' => 'sembarangwes12345@',
-            'smtp_port' => 465,
+            'smtp_host' => getenv('MAIL_HOST'),
+            'smtp_user' => getenv('MAIL_USER'),
+            'smtp_pass' => getenv('MAIL_PASSWORD'),
+            'smtp_port' => getenv('MAIL_PORT'),
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
             'newline'   => "\r\n",
-            'smtp_crypto' => 'TLS'
+            'smtp_crypto' => 'ssl'
         ];
         $kode = md5('voting' . $data['password']);
         $this->ModLogin->setExp($data['id_user'], $kode);
-        // echo $data['email'];
-        // return;
         $this->load->library('email', $config);
-        $this->email->from('noreply.onlinevote@gmail.com', 'Online Vote');
+        $this->email->from(getenv('MAIL_USER'), 'Online Vote');
         $this->email->to($data['email']);
         $this->email->subject('Reset Password');
         $this->email->message("Click <a href='" . base_url('reset/' . $kode) . "'>this link</a> to reset your password");
