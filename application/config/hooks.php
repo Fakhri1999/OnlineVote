@@ -12,6 +12,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 $hook['pre_system'] = function () {
-   $dotenv = Dotenv\Dotenv::create(FCPATH);
-   $dotenv->load();
+   if (file_exists(FCPATH . '/.env')) {
+      $dotenv = Dotenv\Dotenv::create(FCPATH);
+      $dotenv->load();
+   }
 };
