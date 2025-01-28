@@ -36,6 +36,15 @@
  * @filesource
  */
 
+// Load environment variables from the .env file
+if (file_exists(__DIR__ . '/.env')) {
+   $env = parse_ini_file(__DIR__ . '/.env');
+   foreach ($env as $key => $value) {
+       $_ENV[$key] = $value;
+       putenv("$key=$value");
+   }
+}
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
