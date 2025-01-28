@@ -1,5 +1,4 @@
-const baseUrl = window.location.origin;
-console.log(new Date());
+const baseUrl = `${window.location.origin}/`;
 
 $(document).ready(function () {
   $('#numberOfCandidate').on('input', function () {
